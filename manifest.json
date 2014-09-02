@@ -3,7 +3,7 @@
   "name": "Parameters Viewer",
   "version": "0.5",
 
-  "description": "It show the list of parameters passed in a url",
+  "description": "Shows parameters used in the URL and allows to update them ",
 
    "permissions": [
 	  "activeTab",
