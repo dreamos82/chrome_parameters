@@ -7,7 +7,7 @@ Install from [Google Chrome Web Store](https://chrome.google.com/webstore/detail
 
 License
 =================
-Copyright (C) 2014 Ivan Gualandri and collaborators
+Copyright (C) 2014 Ivan Gualandri and Contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
