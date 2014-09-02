@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Parameters Viewer",
-  "version": "0.4",
+  "version": "0.5",
 
   "description": "It show the list of parameters passed in a url",
 
@@ -12,14 +12,14 @@
    ],
 
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["src/background.js"],
     "persistent": false
   },
   
   "page_action": {
     "default_title": "Parameter Viewer",
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_icon": "images/icon.png",
+    "default_popup": "src/popup.html"
   }
   
 } 
