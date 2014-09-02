@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Parameters viewer</title>
+    <style>
+      body {
+        min-width: 357px;
+        overflow-x: hidden;
+      }
+
+      img {
+        margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        width: 75px;
+        height: 75px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+     -->
+    <script src="popup.js"></script>
+    
+  </head>
+  <body>
+	  <div id="parse_button">Show Parameters</div>
+	  <div id="container"></div>
+	  <hr />
+	  <div id="other_buttons"><p id="close">Close</p><p id="update">Send new Parameters</div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Parameters Viewer",
+  "version": "0.4",
+
+  "description": "It show the list of parameters passed in a url",
+
+   "permissions": [
+	  "activeTab",
+          "tabs",
+	  "webNavigation"
+   ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  
+  "page_action": {
+    "default_title": "Parameter Viewer",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
+  
+} 
