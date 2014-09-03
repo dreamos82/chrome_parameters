@@ -26,6 +26,7 @@ function add_hash() {
 	input_hidden.setAttribute("id", "hash");
 	new_element.appendChild(input_hidden);
 	container_element.appendChild(new_element);
+	container_element.appendChild(document.createElement("hr"));
 }
 
 function create_updated_url(url){
