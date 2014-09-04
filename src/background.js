@@ -33,3 +33,21 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	}
 	
 });
+
+function getVersion(){
+    var extension_version = chrome.app.getDetails();
+    return extension_version.version;
+}
+
+function onInstall(){
+    console.log("Extension Installed");
+}
+
+var current_version = getVersion();
+var saved_version = localStorage['version'];
+console.log(current_version);
+
+if(typeof current_version == undefined){
+    onInstall();
+}
+localStorage['version'] = current_version;
