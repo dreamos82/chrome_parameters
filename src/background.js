@@ -45,6 +45,15 @@ function onInstall(){
 }
 
 chrome.runtime.onInstalled.addListener(function(details){
-	onInstall();
+	var current_version = getVersion();
+	var old_version = localStorage['version']
+	if (current_version != old_version) {
+		console.log(old_version);
+		if (old_version == undefined) {
+			console.log("OnInstall Call");
+			localStorage['version'] = current_version;
+			onInstall();
+		}
+	}
 	console.log("Reason: " + details.reason);
 });
