@@ -81,6 +81,8 @@ function parse_url(current_url){
 		console.log(parameter_url);
 		var result = parameter_url.split("&");
 		console.log(parameter_url.length);
+		document.getElementById("container").innerHTML = "";
+
 		for(i=0;i<result.length && result.length>0; i++){
 		 showParameter(result[i]);
 		}
