@@ -30,6 +30,21 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		var parameter_url = tab.url.substring(i++);
 		console.log(parameter_url);
 		chrome.pageAction.show(tabId);
-	}
-	
+	}	
+});
+
+function getVersion(){
+    var extension_version = chrome.app.getDetails();
+    return extension_version.version;
+}
+
+function onInstall(){
+    console.log("Extension Installed");
+    chrome.tabs.create({'url': chrome.extension.getURL('src/post_install.html')}, function(tab){
+    });
+}
+
+chrome.runtime.onInstalled.addListener(function(details){
+	onInstall();
+	console.log("Reason: " + details.reason);
 });

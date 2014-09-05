@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Parameters Viewer",
-  "version": "0.4",
+  "version": "0.5",
 
   "description": "Shows parameters used in the URL and allows to update them ",
 
@@ -17,7 +17,7 @@
   },
   
   "page_action": {
-    "default_title": "Parameter Viewer",
+    "default_title": "Show/Edit parameter for this URL",
     "default_icon": "images/icon.png",
     "default_popup": "src/popup.html"
   }

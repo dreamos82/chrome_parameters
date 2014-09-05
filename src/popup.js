@@ -26,6 +26,7 @@ function add_hash() {
 	input_hidden.setAttribute("id", "hash");
 	new_element.appendChild(input_hidden);
 	container_element.appendChild(new_element);
+	container_element.appendChild(document.createElement("hr"));
 }
 
 function create_updated_url(url){
@@ -128,7 +129,9 @@ function showParameter(parameter, after_hash){
   text_input_element.type = "text";
   text_input_element.value = parameter_array[1];
   text_input_element.setAttribute("id", parameter_array[0]);
-  p_element.appendChild(document.createTextNode(parameter_array[0] + "="));
+  var b_element = document.createElement("b");
+  b_element.appendChild(document.createTextNode(parameter_array[0] + " = "));
+  p_element.appendChild(b_element);
   p_element.appendChild(text_input_element);	
   appendElement(p_element);
 }
