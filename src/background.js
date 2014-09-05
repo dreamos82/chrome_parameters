@@ -46,4 +46,4 @@ function onInstall(){
 chrome.runtime.onInstalled.addListener(function(details){
 	onInstall();
 	console.log("Reason: " + details.reason);
-	});
+});
