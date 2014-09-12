@@ -3,10 +3,6 @@ function click(e) {
 	if(e.target.id=="close") { 
 	  window.close();
 	  return;
-	} else if(e.target.id=="parse_button") {
-	  get_current_tab(function(tab){
-	    parse_url(tab.url);
-	  });
 	} else if(e.target.id=="update"){
 	  get_current_tab(function(tab){
 	    console.log("Creating new Url");
@@ -111,6 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
       divs[i].addEventListener('click', click);
     }
   }
+    get_current_tab(function(tab){
+	    parse_url(tab.url);
+	});
 });
 
 function appendElement(element){
