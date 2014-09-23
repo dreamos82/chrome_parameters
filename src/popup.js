@@ -11,7 +11,34 @@ function click(e) {
 	    chrome.tabs.update(tab.id, {url: updated_url});
 	    window.close();
 	  });
-	}
+	} else if(e.target.id=="addnew") {
+        console.log("Add new parameter");
+        add_new_parameter();
+    }
+}
+
+function add_new_parameter(){
+    var parameter_name_container = document.createElement("input");
+    var parameter_value_container = document.createElement("input");
+    var container = document.getElementById("container");
+    var p_element = document.createElement("p");
+    var div_element = document.createElement("div");
+    parameter_value_container.setAttribute("id", "new_parameter");
+    parameter_name_container.setAttribute("type", "text");
+    parameter_name_container.onblur = function(){
+        if(this.value!=""){
+            var element = this.nextElementSibling;
+            element.setAttribute("id", this.value);
+            var new_label = document.createElement("b");
+            new_label.appendChild(document.createTextNode(this.value));
+            element.parentElement.replaceChild(new_label, this);
+        }
+    };
+    parameter_value_container.setAttribute("type", "text");
+    p_element.appendChild(parameter_name_container);
+    p_element.appendChild(document.createTextNode("=")); 
+    p_element.appendChild(parameter_value_container);
+    appendElement(p_element);
 }
 
 function add_hash() {
@@ -35,14 +62,18 @@ function create_updated_url(url){
     var new_url = url_split[0] + "?";
   }
   for(i=0; i<parameters.length; i++){
-    if (parameters[i].getAttribute("id") == "hash") {
-	new_url = new_url+"#";
-	continue;
-    }
-    new_url = new_url + parameters[i].id + "=" + parameters[i].value;
-    if(i<parameters.length-1){
-	new_url = new_url + "&";
-    }
+      debugger;
+      if (parameters[i].getAttribute("id") == "hash") {
+          new_url = new_url+"#";
+          continue;
+      } else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
+        continue;
+      }
+        
+      new_url = new_url + parameters[i].id + "=" + parameters[i].value;
+      if(i<parameters.length-1){
+          new_url = new_url + "&";
+      }
   }
   return new_url;
 }
