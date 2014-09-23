@@ -17,15 +17,13 @@ function click(e) {
     }
 }
 
-function add_new_update_attributes(){
-}
-
 function add_new_parameter(){
     var parameter_name_container = document.createElement("input");
     var parameter_value_container = document.createElement("input");
     var container = document.getElementById("container");
     var p_element = document.createElement("p");
     var div_element = document.createElement("div");
+    parameter_value_container.setAttribute("id", "new_parameter");
     parameter_name_container.setAttribute("type", "text");
     parameter_name_container.onblur = function(){
         if(this.value!=""){
@@ -34,7 +32,6 @@ function add_new_parameter(){
             var new_label = document.createElement("b");
             new_label.appendChild(document.createTextNode(this.value));
             element.parentElement.replaceChild(new_label, this);
-            //debugger;
         }
     };
     parameter_value_container.setAttribute("type", "text");
@@ -65,14 +62,18 @@ function create_updated_url(url){
     var new_url = url_split[0] + "?";
   }
   for(i=0; i<parameters.length; i++){
-    if (parameters[i].getAttribute("id") == "hash") {
-	new_url = new_url+"#";
-	continue;
-    }
-    new_url = new_url + parameters[i].id + "=" + parameters[i].value;
-    if(i<parameters.length-1){
-	new_url = new_url + "&";
-    }
+      debugger;
+      if (parameters[i].getAttribute("id") == "hash") {
+          new_url = new_url+"#";
+          continue;
+      } else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
+        continue;
+      }
+        
+      new_url = new_url + parameters[i].id + "=" + parameters[i].value;
+      if(i<parameters.length-1){
+          new_url = new_url + "&";
+      }
   }
   return new_url;
 }
