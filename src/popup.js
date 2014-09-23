@@ -28,12 +28,14 @@ function add_new_parameter(){
     var div_element = document.createElement("div");
     parameter_name_container.setAttribute("type", "text");
     parameter_name_container.onblur = function(){
-        var element = this.nextElementSibling;
-        element.setAttribute("id", this.value);
-        var new_label = document.createElement("b");
-        new_label.appendChild(document.createTextNode(this.value));
-        element.parentElement.replaceChild(new_label, this);
-        //debugger;
+        if(this.value!=""){
+            var element = this.nextElementSibling;
+            element.setAttribute("id", this.value);
+            var new_label = document.createElement("b");
+            new_label.appendChild(document.createTextNode(this.value));
+            element.parentElement.replaceChild(new_label, this);
+            //debugger;
+        }
     };
     parameter_value_container.setAttribute("type", "text");
     p_element.appendChild(parameter_name_container);
