@@ -167,3 +167,7 @@ function showParameter(parameter, after_hash){
   p_element.appendChild(text_input_element);	
   appendElement(p_element);
 }
+
+function export_parameters_list(format){
+	console.log("Placeholder");
+}
