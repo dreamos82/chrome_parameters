@@ -187,10 +187,11 @@ function export_parameters_list(format){
 }
 
 function create_csv(parameters_array){
-    var csv_file = "data:text/csv;charset=utf-8,";    
+    var csv_file = "data:text/csv;charset=utf-8,";
+    csv_file += "parameter_name, value\n";
     for(var key in parameters_array){
-        csv_file += key + "," + parameters_array[key]+"\n"
-        console.log(key + "," + parameters_array[key]);
+        csv_file += key + "," + parameters_array[key]+"\n";
     }
+    debugger;
     return csv_file;
 }
