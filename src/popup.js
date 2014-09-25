@@ -1,3 +1,5 @@
+var exporters = {csv: create_csv};
+
 function click(e) {
 	console.log(e.target.id);
 	if(e.target.id=="close") { 
@@ -14,6 +16,8 @@ function click(e) {
 	} else if(e.target.id=="addnew") {
         console.log("Add new parameter");
         add_new_parameter();
+    } else if(e.target.id=="export"){
+        export_parameters_list("csv");
     }
 }
 
@@ -170,4 +174,14 @@ function showParameter(parameter, after_hash){
 
 function export_parameters_list(format){
 	console.log("Placeholder");
+    var container_div = document.getElementById("container");
+    var parameters = container_div.getElementsByTagName("input");
+    for(i=0; i<parameters.length; i++){   
+        console.log(parameters[i].getAttribute("id"));
+    }
+    exporters[format](parameters);
+}
+
+function create_csv(parameters_array){
+    console.log('create_csv placeholder');
 }
