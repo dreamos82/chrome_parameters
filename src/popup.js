@@ -176,12 +176,21 @@ function export_parameters_list(format){
 	console.log("Placeholder");
     var container_div = document.getElementById("container");
     var parameters = container_div.getElementsByTagName("input");
+    var parameters_array = new Array();
     for(i=0; i<parameters.length; i++){   
         console.log(parameters[i].getAttribute("id"));
+        parameters_array[parameters[i].getAttribute("id")] = parameters[i].value;
     }
-    exporters[format](parameters);
+    var result = exporters[format](parameters_array);
+    var encodedUri = encodeURI(result);
+    window.open(encodedUri);
 }
 
 function create_csv(parameters_array){
-    console.log('create_csv placeholder');
+    var csv_file = "data:text/csv;charset=utf-8,";    
+    for(var key in parameters_array){
+        csv_file += key + "," + parameters_array[key]+"\n"
+        console.log(key + "," + parameters_array[key]);
+    }
+    return csv_file;
 }
