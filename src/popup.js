@@ -182,16 +182,21 @@ function export_parameters_list(format){
         parameters_array[parameters[i].getAttribute("id")] = parameters[i].value;
     }
     var result = exporters[format](parameters_array);
-    var encodedUri = encodeURI(result);
-    window.open(encodedUri);
+    var link = document.createElement("a");
+    var date = new Date();
+    debugger;
+    link.download = "export"+date.getFullYear()+date.getMonth()+date.getDay()+"." + format;
+    link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
+    link.click();
+    //var encodedUri = encodeURI(result);
+    //window.open(encodedUri);
 }
 
 function create_csv(parameters_array){
-    var csv_file = "data:text/csv;charset=utf-8,";
-    csv_file += "parameter_name, value\n";
+    //var csv_file = "data:text/csv;charset=utf-8,";
+    var csv_file = "parameter_name,value\n";
     for(var key in parameters_array){
         csv_file += key + "," + parameters_array[key]+"\n";
     }
-    debugger;
     return csv_file;
 }
