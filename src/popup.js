@@ -168,8 +168,18 @@ function showParameter(parameter, after_hash){
   var b_element = document.createElement("b");
   b_element.appendChild(document.createTextNode(parameter_array[0] + " = "));
   p_element.appendChild(b_element);
-  p_element.appendChild(text_input_element);	
+  p_element.appendChild(text_input_element);
+  var img_element = document.createElement("img");
+  img_element.addEventListener('click', delete_parameter, false);
+  img_element.setAttribute("id", parameter_array[0]);
+  img_element.src = '../images/delete.png';
+  p_element.appendChild(img_element);
   appendElement(p_element);
+}
+
+function delete_parameter(){
+	console.log('To call');
+	debugger;
 }
 
 function export_parameters_list(format){
