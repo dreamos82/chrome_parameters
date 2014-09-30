@@ -66,7 +66,6 @@ function create_updated_url(url){
     var new_url = url_split[0] + "?";
   }
   for(i=0; i<parameters.length; i++){
-      debugger;
       if (parameters[i].getAttribute("id") == "hash") {
           new_url = new_url+"#";
           continue;
@@ -199,8 +198,6 @@ function export_parameters_list(format){
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
     link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
     link.click();
-    //var encodedUri = encodeURI(result);
-    //window.open(encodedUri);
 }
 
 function create_csv(parameters_array){
