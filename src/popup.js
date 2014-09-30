@@ -66,7 +66,6 @@ function create_updated_url(url){
     var new_url = url_split[0] + "?";
   }
   for(i=0; i<parameters.length; i++){
-      debugger;
       if (parameters[i].getAttribute("id") == "hash") {
           new_url = new_url+"#";
           continue;
@@ -168,8 +167,19 @@ function showParameter(parameter, after_hash){
   var b_element = document.createElement("b");
   b_element.appendChild(document.createTextNode(parameter_array[0] + " = "));
   p_element.appendChild(b_element);
-  p_element.appendChild(text_input_element);	
+  p_element.appendChild(text_input_element);
+  var img_element = document.createElement("img");
+  img_element.addEventListener('click', delete_parameter, false);
+  img_element.setAttribute("id", parameter_array[0]);
+  img_element.src = '../images/delete.png';
+  p_element.appendChild(img_element);
   appendElement(p_element);
+}
+
+function delete_parameter(){
+	console.log('To call');
+    var container = this.parentNode.parentNode;
+    container.parentNode.removeChild(container);
 }
 
 function export_parameters_list(format){
@@ -184,12 +194,9 @@ function export_parameters_list(format){
     var result = exporters[format](parameters_array);
     var link = document.createElement("a");
     var date = new Date();
-    debugger;
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
     link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
     link.click();
-    //var encodedUri = encodeURI(result);
-    //window.open(encodedUri);
 }
 
 function create_csv(parameters_array){
