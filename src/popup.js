@@ -1,3 +1,5 @@
+var exporters = {csv: create_csv};
+
 function click(e) {
 	console.log(e.target.id);
 	if(e.target.id=="close") { 
@@ -14,6 +16,8 @@ function click(e) {
 	} else if(e.target.id=="addnew") {
         console.log("Add new parameter");
         add_new_parameter();
+    } else if(e.target.id=="export"){
+        export_parameters_list("csv");
     }
 }
 
@@ -62,7 +66,6 @@ function create_updated_url(url){
     var new_url = url_split[0] + "?";
   }
   for(i=0; i<parameters.length; i++){
-      debugger;
       if (parameters[i].getAttribute("id") == "hash") {
           new_url = new_url+"#";
           continue;
@@ -164,6 +167,43 @@ function showParameter(parameter, after_hash){
   var b_element = document.createElement("b");
   b_element.appendChild(document.createTextNode(parameter_array[0] + " = "));
   p_element.appendChild(b_element);
-  p_element.appendChild(text_input_element);	
+  p_element.appendChild(text_input_element);
+  var img_element = document.createElement("img");
+  img_element.addEventListener('click', delete_parameter, false);
+  img_element.setAttribute("id", parameter_array[0]);
+  img_element.src = '../images/delete.png';
+  p_element.appendChild(img_element);
   appendElement(p_element);
+}
+
+function delete_parameter(){
+	console.log('To call');
+    var container = this.parentNode.parentNode;
+    container.parentNode.removeChild(container);
+}
+
+function export_parameters_list(format){
+	console.log("Placeholder");
+    var container_div = document.getElementById("container");
+    var parameters = container_div.getElementsByTagName("input");
+    var parameters_array = new Array();
+    for(i=0; i<parameters.length; i++){   
+        console.log(parameters[i].getAttribute("id"));
+        parameters_array[parameters[i].getAttribute("id")] = parameters[i].value;
+    }
+    var result = exporters[format](parameters_array);
+    var link = document.createElement("a");
+    var date = new Date();
+    link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
+    link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
+    link.click();
+}
+
+function create_csv(parameters_array){
+    //var csv_file = "data:text/csv;charset=utf-8,";
+    var csv_file = "parameter_name,value\n";
+    for(var key in parameters_array){
+        csv_file += key + "," + parameters_array[key]+"\n";
+    }
+    return csv_file;
 }
