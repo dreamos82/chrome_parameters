@@ -194,7 +194,6 @@ function export_parameters_list(format){
     var result = exporters[format](parameters_array);
     var link = document.createElement("a");
     var date = new Date();
-    debugger;
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
     link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
     link.click();
