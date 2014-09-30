@@ -179,7 +179,8 @@ function showParameter(parameter, after_hash){
 
 function delete_parameter(){
 	console.log('To call');
-	debugger;
+    var container = this.parentNode.parentNode;
+    container.parentNode.removeChild(container);
 }
 
 function export_parameters_list(format){
