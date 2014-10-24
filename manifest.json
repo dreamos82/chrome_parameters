@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Parameters Editor",
-  "version": "1.0",  
+  "version": "1.1",
 
-  "description": "Shows parameters used in the URL and allows to update them ",
+  "description": "Shows parameters used in the URL and allows to update, export them ",
 
    "permissions": [
 	  "activeTab",

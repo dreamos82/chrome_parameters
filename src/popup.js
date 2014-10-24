@@ -203,7 +203,7 @@ function create_csv(parameters_array){
     //var csv_file = "data:text/csv;charset=utf-8,";
     var csv_file = "parameter_name,value\n";
     for(var key in parameters_array){
-        csv_file += key + "," + parameters_array[key]+"\n";
+        csv_file += key + "," + "\"" + parameters_array[key]+ "\"\n";
     }
     return csv_file;
 }
