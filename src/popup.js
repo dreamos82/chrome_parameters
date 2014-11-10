@@ -18,7 +18,38 @@ function click(e) {
         add_new_parameter();
     } else if(e.target.id=="export"){
         export_parameters_list("csv");
+    } else if(e.target.id=="import"){
+        var chosenFileEntry = null;
+        console.log("Import Called");
+        var el = document.getElementById("myInput");
+        document.getElementById('myInput').addEventListener('change', read_single_file, false);
+        el.click();
+        /*chrome.fileSystem.chooseEntry({type: 'openFile'}, function(readOnlyEntry) {
+            readOnlyEntry.file(function(file) {
+                var reader = new FileReader();
+                reader.onerror = errorHandler;
+                reader.onloadend = function(e) {
+                console.log(e.target.result);
+                };
+                debugger;
+                reader.readAsText(file);
+            });
+	   });*/
     }
+}
+
+function read_single_file(evt){
+    console.log("Called file event");
+    var f= evt.target.files[0];
+    if(f){
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var contents = e.target.result;
+            console.log(contents);
+        }
+        reader.readAsText(f);
+    }
+    debugger;
 }
 
 function add_new_parameter(){
