@@ -32,17 +32,6 @@ function click(e) {
         var el = document.getElementById("myInput");
         document.getElementById('myInput').addEventListener('change', read_single_file, false);
         el.click();
-        /*chrome.fileSystem.chooseEntry({type: 'openFile'}, function(readOnlyEntry) {
-            readOnlyEntry.file(function(file) {
-                var reader = new FileReader();
-                reader.onerror = errorHandler;
-                reader.onloadend = function(e) {
-                console.log(e.target.result);
-                };
-                debugger;
-                reader.readAsText(file);
-            });
-	   });*/
     }
 }
 
