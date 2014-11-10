@@ -1,3 +1,11 @@
+/**
+ * chrome_parameters Extension
+ *
+ * popup.js
+ *
+ * @version 1.1
+ *
+ */
 var exporters = {csv: create_csv};
 
 function click(e) {
@@ -38,6 +46,7 @@ function click(e) {
     }
 }
 
+
 function read_single_file(evt){
     console.log("Called file event");
     var f= evt.target.files[0];
@@ -45,6 +54,19 @@ function read_single_file(evt){
         var reader = new FileReader();
         reader.onload = function(e){
             var contents = e.target.result;
+	    var parameters = contents.split('\n');
+	    document.getElementById("container").innerHTML = "";
+	    for(var i = 0; i <parameters.length-1; i++){
+		var comma_index = parameters[i].indexOf(",");
+		if (comma_index == -1) {
+			alert("Wrong file format");
+			break;
+		}
+		var parameter = parameters[i].substr(0, comma_index) + '=' + parameters[i].substr(comma_index+'='.length);
+		if (!(parameter.substr(0, comma_index) == "parameter_name")) {
+			showParameter(parameter);
+		}
+	    }
             console.log(contents);
         }
         reader.readAsText(f);
@@ -177,6 +199,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
+/**
+ * Append an element to the given element.
+ * 
+ * @param element to append
+ */
 function appendElement(element){
   var newdiv = document.createElement("div");
   newdiv.appendChild(element);
@@ -184,6 +211,12 @@ function appendElement(element){
   container_element.appendChild(newdiv);
 }
 
+/**
+ * Show a parameter line in extension popup. 
+ *
+ * @param parameter - The parameter to show. The string format should be: parameter_name=parameter_value
+ * @param afetr_hash - not used
+ */
 function showParameter(parameter, after_hash){
   var p_element = document.createElement("p");
   var parameter_array = parameter.split("=");
@@ -213,6 +246,13 @@ function delete_parameter(){
     container.parentNode.removeChild(container);
 }
 
+/**
+ * Export the current parameters_list in the format provided. Currently available formats are: "csv".
+ * To add support for a format, create an exporter function, and add an entry in exporters variable. in key: value format. Where
+ * key is the format name, value is the exporter function.
+ *
+ * @param format - The selected export format
+ */
 function export_parameters_list(format){
 	console.log("Placeholder");
     var container_div = document.getElementById("container");
@@ -230,6 +270,11 @@ function export_parameters_list(format){
     link.click();
 }
 
+/**
+ * Create a csv string given a parameters_array.
+ *
+ * @param parameters_array Associative array where key is the parameter name.
+ */
 function create_csv(parameters_array){
     //var csv_file = "data:text/csv;charset=utf-8,";
     var csv_file = "parameter_name,value\n";
