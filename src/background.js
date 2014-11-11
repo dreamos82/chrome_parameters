@@ -9,6 +9,47 @@
 
 var tag;
 
+file_import = function(element, tab){
+    element.addEventListener('change', function(evt){
+        read_single_file(evt,tab);
+    }, false);
+    element.click();
+}
+
+function read_single_file(evt, tab){
+    console.log("Called file event" + tab.url);
+    var f= evt.target.files[0];
+    if(f){
+        var reader = new FileReader();
+        reader.onload = function(e){
+        var contents = e.target.result;
+	    var parameters = contents.split('\n');
+        var url_array = tab.url.split('?', 1)[0] + '?';
+	    for(var i = 0; i <parameters.length-1; i++){
+		  var comma_index = parameters[i].indexOf(",");
+		  if (comma_index == -1) {
+              alert("Wrong file format");
+			 break;
+		  }
+		  var parameter = parameters[i].substr(0, comma_index) + '=' + parameters[i].substr(comma_index+'='.length);
+		  if (!(parameter.substr(0, comma_index) == "parameter_name")) {
+              //showParameter(parameter);
+              if(i!=0) {
+                  url_array += '&';
+              }
+              url_array += parameter
+		  }
+	    }
+        console.log(url_array);
+        chrome.tabs.update(tab.id, {url: url_array});
+//        alert("update");
+        }
+        reader.readAsText(f);
+    }
+    debugger;
+}
+
+
 
 /**
 * Get the url paramater identified by sParam  

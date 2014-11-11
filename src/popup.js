@@ -27,40 +27,17 @@ function click(e) {
     } else if(e.target.id=="export"){
         export_parameters_list("csv");
     } else if(e.target.id=="import"){
-        var chosenFileEntry = null;
+        get_current_tab(function(tab){
+            var BGPage = chrome.extension.getBackgroundPage();
+            BGPage.file_import(document.getElementById('myInput'), tab);
+        });
+        /*chrome.runtime.sendMessage({ action: 'browseAndUpload' });*/
+        /*var chosenFileEntry = null;
         console.log("Import Called");
         var el = document.getElementById("myInput");
         document.getElementById('myInput').addEventListener('change', read_single_file, false);
-        el.click();
+        el.click();*/
     }
-}
-
-
-function read_single_file(evt){
-    console.log("Called file event");
-    var f= evt.target.files[0];
-    if(f){
-        var reader = new FileReader();
-        reader.onload = function(e){
-            var contents = e.target.result;
-	    var parameters = contents.split('\n');
-	    document.getElementById("container").innerHTML = "";
-	    for(var i = 0; i <parameters.length-1; i++){
-		var comma_index = parameters[i].indexOf(",");
-		if (comma_index == -1) {
-			alert("Wrong file format");
-			break;
-		}
-		var parameter = parameters[i].substr(0, comma_index) + '=' + parameters[i].substr(comma_index+'='.length);
-		if (!(parameter.substr(0, comma_index) == "parameter_name")) {
-			showParameter(parameter);
-		}
-	    }
-            console.log(contents);
-        }
-        reader.readAsText(f);
-    }
-    debugger;
 }
 
 function add_new_parameter(){
