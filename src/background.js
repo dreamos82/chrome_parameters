@@ -9,14 +9,50 @@
 
 var tag;
 
+var fileChooser = document.createElement('input');
+fileChooser.type = 'file';
+fileChooser.addEventListener('change', function () {
+    alert('called ---');
+});
+
+var form = document.createElement('form');
+form.appendChild(fileChooser);
+
+
+/* Listen for messages from popup */
+chrome.runtime.onMessage.addListener(function (msg) {
+    if (msg.action === 'importFromFile') {
+        alert('message received');
+        fileChooser.click();
+        //fileChooser.click();
+        chrome.tabs.query({
+		active: true,               // Select active tabs
+		lastFocusedWindow: true     // In the current window
+	}, function(array_of_Tabs) {
+		// Since there can only be one active tab in one active window, 
+		//  the array has only one element
+		/*var tab = array_of_Tabs[0];
+		// Example:
+		var url = tab.url;
+		alert("Url: " + url);
+		// ... do something with url variable
+		new_url = url;*/
+	});
+    }
+});
+
+
 file_import = function(element, tab){
     element.addEventListener('change', function(evt){
+        alert("asasdads");
         read_single_file(evt,tab);
     }, false);
     element.click();
+    console.log("uffa");
 }
 
 function read_single_file(evt, tab){
+    alert("called asd");
     console.log("Called file event" + tab.url);
     var f= evt.target.files[0];
     if(f){

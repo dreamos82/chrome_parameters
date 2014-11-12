@@ -27,10 +27,12 @@ function click(e) {
     } else if(e.target.id=="export"){
         export_parameters_list("csv");
     } else if(e.target.id=="import"){
-        get_current_tab(function(tab){
+        chrome.runtime.sendMessage({ action: 'importFromFile' });
+        /*get_current_tab(function(tab){
             var BGPage = chrome.extension.getBackgroundPage();
             BGPage.file_import(document.getElementById('myInput'), tab);
-        });
+            
+        });*/
         /*chrome.runtime.sendMessage({ action: 'browseAndUpload' });*/
         /*var chosenFileEntry = null;
         console.log("Import Called");
