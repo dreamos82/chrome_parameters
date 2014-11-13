@@ -1,3 +1,11 @@
+/**
+ * chrome_parameters Extension
+ *
+ * popup.js
+ *
+ * @version 1.1
+ *
+ */
 var exporters = {csv: create_csv};
 
 function click(e) {
@@ -18,6 +26,14 @@ function click(e) {
         add_new_parameter();
     } else if(e.target.id=="export"){
         export_parameters_list("csv");
+    } else if(e.target.id=="import"){
+        get_current_tab(function(tab){
+            console.log("boh");
+            chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){                
+                console.log("aaah");
+            });
+            
+        });
     }
 }
 
@@ -146,6 +162,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
+/**
+ * Append an element to the given element.
+ * 
+ * @param element to append
+ */
 function appendElement(element){
   var newdiv = document.createElement("div");
   newdiv.appendChild(element);
@@ -153,6 +174,12 @@ function appendElement(element){
   container_element.appendChild(newdiv);
 }
 
+/**
+ * Show a parameter line in extension popup. 
+ *
+ * @param parameter - The parameter to show. The string format should be: parameter_name=parameter_value
+ * @param afetr_hash - not used
+ */
 function showParameter(parameter, after_hash){
   var p_element = document.createElement("p");
   var parameter_array = parameter.split("=");
@@ -182,6 +209,13 @@ function delete_parameter(){
     container.parentNode.removeChild(container);
 }
 
+/**
+ * Export the current parameters_list in the format provided. Currently available formats are: "csv".
+ * To add support for a format, create an exporter function, and add an entry in exporters variable. in key: value format. Where
+ * key is the format name, value is the exporter function.
+ *
+ * @param format - The selected export format
+ */
 function export_parameters_list(format){
 	console.log("Placeholder");
     var container_div = document.getElementById("container");
@@ -199,11 +233,16 @@ function export_parameters_list(format){
     link.click();
 }
 
+/**
+ * Create a csv string given a parameters_array.
+ *
+ * @param parameters_array Associative array where key is the parameter name.
+ */
 function create_csv(parameters_array){
     //var csv_file = "data:text/csv;charset=utf-8,";
     var csv_file = "parameter_name,value\n";
     for(var key in parameters_array){
-        csv_file += key + "," + parameters_array[key]+"\n";
+        csv_file += key + "," + "\"" + parameters_array[key]+ "\"\n";
     }
     return csv_file;
 }

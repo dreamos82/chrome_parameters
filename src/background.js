@@ -1,5 +1,13 @@
-var tag;
+/**
+ * chrome_parameters Extension
+ *
+ * background.js
+ *
+ * @version 1.1
+ *
+ */
 
+var tag;
 
 /**
 * Get the url paramater identified by sParam  
