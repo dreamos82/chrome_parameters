@@ -1,13 +1,16 @@
 /**
- * Content script js file
+ * chrome_parameters Extension
+ *
+ * content_script.js
+ *
+ * @version 1.1
+ *
  */
 
-alert('calle');
-console.log('ciao');
 var fileChooser = document.createElement("input");
 fileChooser.type = 'file';
 fileChooser.addEventListener('change', function (evt) {
-    alert('inside change listener...');
+    console.log('inside content script change event');
     var f= evt.target.files[0];
     if(f){
         var reader = new FileReader();
