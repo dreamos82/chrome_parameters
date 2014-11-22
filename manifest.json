@@ -3,7 +3,7 @@
   "name": "Parameters Editor",
   "version": "1.1",
 
-  "description": "Shows parameters used in the URL and allows to update, export them ",
+  "description": "Shows parameters used in the URL and allows to update, export and import them ",
 
    "permissions": [
        "activeTab",
