@@ -15,7 +15,7 @@
     "scripts": ["src/background.js"],
     "persistent": false
   },
-  
+    
   "page_action": {
     "default_title": "Show/Edit parameter for this URL",
     "default_icon": "images/icon.png",
