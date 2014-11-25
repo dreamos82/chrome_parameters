@@ -14,13 +14,7 @@ function click(e) {
 	  window.close();
 	  return;
 	} else if(e.target.id=="update"){
-	  get_current_tab(function(tab){
-	    console.log("Creating new Url");
-	    var updated_url = create_updated_url(tab.url);
-	    console.log(updated_url);
-	    chrome.tabs.update(tab.id, {url: updated_url});
-	    window.close();
-	  });
+	  update_url();
 	} else if(e.target.id=="addnew") {
         console.log("Add new parameter");
         add_new_parameter();
@@ -35,6 +29,16 @@ function click(e) {
             
         });
     }
+}
+
+function update_url(){
+	get_current_tab(function(tab){
+		console.log("Creating new Url");
+		var updated_url = create_updated_url(tab.url);
+		console.log(updated_url);
+		chrome.tabs.update(tab.id, {url: updated_url});
+		window.close();
+	});	
 }
 
 function add_new_parameter(){
@@ -162,6 +166,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
+function input_keypress(event){
+	if (event.keyCode == 13) {
+		update_url();
+	}
+	console.log(event.keyCode);
+	
+}
+
 /**
  * Append an element to the given element.
  * 
@@ -191,6 +203,7 @@ function showParameter(parameter, after_hash){
   text_input_element.type = "text";
   text_input_element.value = parameter_array[1];
   text_input_element.setAttribute("id", parameter_array[0]);
+  text_input_element.addEventListener("keypress", input_keypress);
   var b_element = document.createElement("b");
   b_element.appendChild(document.createTextNode(parameter_array[0] + " = "));
   p_element.appendChild(b_element);
