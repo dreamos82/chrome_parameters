@@ -1,8 +1,8 @@
 /**
  * chrome_parameters Extension
  *
+ * This script contains logic for csv import.
  * content_script.js
- *
  * @version 1.1
  *
  */
@@ -29,10 +29,11 @@ fileChooser.addEventListener('change', function (evt) {
                     if(i!=1) {
                         url_array += '&';
                     }
-                    url_array += parameter
+                    url_array += parameter;
                 }
             }
             console.log(url_array);
+            url_array = url_array.replace(/"/g, '');
             document.location.href= url_array;
         }
         reader.readAsText(f);
