@@ -194,7 +194,7 @@ function appendElement(element){
  */
 function showParameter(parameter, after_hash){
   var p_element = document.createElement("p");
-  var parameter_array = parameter.split("=");
+  var parameter_array = parameter.split(/=(.+)?/);
   if(parameter_array.length <2) {
     console.log("No parameter");
     return;
