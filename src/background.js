@@ -1,5 +1,13 @@
-var tag;
+/**
+ * chrome_parameters Extension
+ *
+ * background.js
+ *
+ * @version 1.1
+ *
+ */
 
+var tag;
 
 /**
 * Get the url paramater identified by sParam  
@@ -24,13 +32,8 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	var i = 0;
 	console.log(tab.url.length);
 	var i = tab.url.indexOf('?');
-	if(i==-1){
-		console.log("no parameters");
-	} else {
-		var parameter_url = tab.url.substring(i++);
-		console.log(parameter_url);
-		chrome.pageAction.show(tabId);
-	}	
+	var parameter_url = tab.url.substring(i++);
+	chrome.pageAction.show(tabId);
 });
 
 function getVersion(){

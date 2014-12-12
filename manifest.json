@@ -1,21 +1,21 @@
 {
   "manifest_version": 2,
   "name": "Parameters Editor",
-  "version": "1.0",  
+  "version": "1.1",
 
-  "description": "Shows parameters used in the URL and allows to update them ",
+  "description": "Shows parameters used in the URL and allows to update, export and import them ",
 
    "permissions": [
-	  "activeTab",
-          "tabs",
-	  "webNavigation"
+       "activeTab",
+       "tabs", "<all_urls>",
+       "webNavigation"
    ],
 
   "background": {
     "scripts": ["src/background.js"],
     "persistent": false
   },
-  
+    
   "page_action": {
     "default_title": "Show/Edit parameter for this URL",
     "default_icon": "images/icon.png",

@@ -1,3 +1,11 @@
+/**
+ * chrome_parameters Extension
+ *
+ * popup.js
+ *
+ * @version 1.1
+ *
+ */
 var exporters = {csv: create_csv};
 
 function click(e) {
@@ -6,19 +14,31 @@ function click(e) {
 	  window.close();
 	  return;
 	} else if(e.target.id=="update"){
-	  get_current_tab(function(tab){
-	    console.log("Creating new Url");
-	    var updated_url = create_updated_url(tab.url);
-	    console.log(updated_url);
-	    chrome.tabs.update(tab.id, {url: updated_url});
-	    window.close();
-	  });
+	  update_url();
 	} else if(e.target.id=="addnew") {
         console.log("Add new parameter");
         add_new_parameter();
     } else if(e.target.id=="export"){
         export_parameters_list("csv");
+    } else if(e.target.id=="import"){
+        get_current_tab(function(tab){
+            console.log("boh");
+            chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){                
+                console.log("aaah");
+            });
+            
+        });
     }
+}
+
+function update_url(){
+	get_current_tab(function(tab){
+		console.log("Creating new Url");
+		var updated_url = create_updated_url(tab.url);
+		console.log(updated_url);
+		chrome.tabs.update(tab.id, {url: updated_url});
+		window.close();
+	});	
 }
 
 function add_new_parameter(){
@@ -146,6 +166,19 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
+function input_keypress(event){
+	if (event.keyCode == 13) {
+		update_url();
+	}
+	console.log(event.keyCode);
+	
+}
+
+/**
+ * Append an element to the given element.
+ * 
+ * @param element to append
+ */
 function appendElement(element){
   var newdiv = document.createElement("div");
   newdiv.appendChild(element);
@@ -153,9 +186,15 @@ function appendElement(element){
   container_element.appendChild(newdiv);
 }
 
+/**
+ * Show a parameter line in extension popup. 
+ *
+ * @param parameter - The parameter to show. The string format should be: parameter_name=parameter_value
+ * @param afetr_hash - not used
+ */
 function showParameter(parameter, after_hash){
   var p_element = document.createElement("p");
-  var parameter_array = parameter.split("=");
+  var parameter_array = parameter.split(/=(.+)?/);
   if(parameter_array.length <2) {
     console.log("No parameter");
     return;
@@ -164,6 +203,7 @@ function showParameter(parameter, after_hash){
   text_input_element.type = "text";
   text_input_element.value = parameter_array[1];
   text_input_element.setAttribute("id", parameter_array[0]);
+  text_input_element.addEventListener("keypress", input_keypress);
   var b_element = document.createElement("b");
   b_element.appendChild(document.createTextNode(parameter_array[0] + " = "));
   p_element.appendChild(b_element);
@@ -182,6 +222,13 @@ function delete_parameter(){
     container.parentNode.removeChild(container);
 }
 
+/**
+ * Export the current parameters_list in the format provided. Currently available formats are: "csv".
+ * To add support for a format, create an exporter function, and add an entry in exporters variable. in key: value format. Where
+ * key is the format name, value is the exporter function.
+ *
+ * @param format - The selected export format
+ */
 function export_parameters_list(format){
 	console.log("Placeholder");
     var container_div = document.getElementById("container");
@@ -199,11 +246,16 @@ function export_parameters_list(format){
     link.click();
 }
 
+/**
+ * Create a csv string given a parameters_array.
+ *
+ * @param parameters_array Associative array where key is the parameter name.
+ */
 function create_csv(parameters_array){
     //var csv_file = "data:text/csv;charset=utf-8,";
     var csv_file = "parameter_name,value\n";
     for(var key in parameters_array){
-        csv_file += key + "," + parameters_array[key]+"\n";
+        csv_file += key + "," + "\"" + parameters_array[key]+ "\"\n";
     }
     return csv_file;
 }
