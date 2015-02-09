@@ -28,6 +28,9 @@ function click(e) {
             });
             
         });
+    } else if(e.target.id=="social_button"){
+        console.log("Show social bar");
+        document.getElementById("social_bar").style.display = 'block';
     }
 }
 
