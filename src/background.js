@@ -49,6 +49,8 @@ function onInstall(){
 
 function onUpdate(){
     console.log("Extension Updated");
+    chrome.tabs.create({'url': chrome.extension.getURL('src/post_update.html')}, function(tab){
+    });
 }
 
 chrome.runtime.onInstalled.addListener(function(details){
@@ -60,6 +62,9 @@ chrome.runtime.onInstalled.addListener(function(details){
 			console.log("OnInstall Call");
 			localStorage['version'] = current_version;
 			onInstall();
+		} else {
+			localStorage['version'] = current_version;
+			onUpdate();
 		}
 	}
 	console.log("Reason: " + details.reason);
