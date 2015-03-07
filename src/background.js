@@ -47,6 +47,10 @@ function onInstall(){
     });
 }
 
+function onUpdate(){
+    console.log("Extension Updated");
+}
+
 chrome.runtime.onInstalled.addListener(function(details){
 	var current_version = getVersion();
 	var old_version = localStorage['version']
