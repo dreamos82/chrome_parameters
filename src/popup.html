@@ -25,9 +25,14 @@
         div#report_bug {
             text-align: right;
         }
+        div#social_bar {
+            display: none;
+        }
         
         #report_bug a:link { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
         #report_bug a:visited { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
+        #social_link a:link { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
+        #social_link a:visited { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
         
     </style>
 
@@ -48,13 +53,26 @@
 	  <div id="other_buttons">
 	    <img id="update" src="../images/update.png"/>
 	    <img id="addnew" src="../images/add.png"/>
-            <img id="export" src="../images/export.png"/>
+        <img id="export" src="../images/export.png"/>
 	    <img id="import" src="../images/import.png"/>
             <img id="close" src="../images/close.png"/>
 	    <input id="myInput" type="file" style="display:none" />
 	  </div>
-      <div id="report_bug">
+      <div>
+          <div id="report_bug">
           <a href="https://github.com/c103/chrome_parameters/issues/new" target="_blank">Report a bug</a>
+        </div>
+        <div id="social_link">
+          <a id="social_button" href="#">Like it...</a>
+        </div>
+      </div>
+      <div>
+          <div id="social_bar">
+              <a href="https://flattr.com/submit/auto?user_id=italialinux&url=http%3A%2F%2Fc103.github.io%2Fchrome_parameters%2F" target="_blank"><img src="../images/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+              <a target="_blank" href="http://www.facebook.com/sharer.php?u=https://chrome.google.com/webstore/detail/parameters-editor/jcfdalmioobeifbpcgjghhaifimaeaca"><img src="../images/fb_button.png" /></a>
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=Try%20Chrome%20(url)%20parameters%20editor%2C%20an%20extension%20for%20chrome%3A%20http%3A%2F%2Fgoo.gl%2FNbZdfl"><img src="../images/twitter.png" /></a>
+              <a target="_blank" href="https://plus.google.com/share?url=http%3A%2F%2Fgoo.gl%2FNbZdfl"><img src="../images/gplus.png" /></a>
+          </div>
       </div>
   </body>
 </html>

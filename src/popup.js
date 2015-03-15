@@ -28,6 +28,10 @@ function click(e) {
             });
             
         });
+    } else if(e.target.id=="social_button"){
+        console.log("Show social bar");
+        var element = document.getElementById("social_bar")
+        element.style.display = "block";
     }
 }
 
@@ -49,6 +53,7 @@ function add_new_parameter(){
     var div_element = document.createElement("div");
     parameter_value_container.setAttribute("id", "new_parameter");
     parameter_name_container.setAttribute("type", "text");
+    parameter_value_container.addEventListener("keypress", input_keypress);
     parameter_name_container.onblur = function(){
         if(this.value!=""){
             var element = this.nextElementSibling;
