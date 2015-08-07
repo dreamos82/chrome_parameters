@@ -49,9 +49,9 @@ function add_new_parameter(){
     var parameter_name_container = document.createElement("input");
     var parameter_value_container = document.createElement("input");
     var container = document.getElementById("container");
-    var p_element = document.createElement("p");
-    var div_element = document.createElement("div");
     parameter_value_container.setAttribute("id", "new_parameter");
+    parameter_value_container.setAttribute("class", "parameter_value");
+    parameter_name_container.setAttribute("class", "parameter_name");
     parameter_name_container.setAttribute("type", "text");
     parameter_value_container.addEventListener("keypress", input_keypress);
     parameter_name_container.onblur = function(){
@@ -64,10 +64,18 @@ function add_new_parameter(){
         }
     };
     parameter_value_container.setAttribute("type", "text");
-    p_element.appendChild(parameter_name_container);
-    p_element.appendChild(document.createTextNode("=")); 
-    p_element.appendChild(parameter_value_container);
-    appendElement(p_element);
+    add_new_row(parameter_name_container, parameter_value_container);
+}
+
+function add_new_row() {
+    var tr_element = document.createElement("tr");
+    for(var i in arguments) {
+      var td = document.createElement("td");
+      td.appendChild(arguments[i]);
+      tr_element.appendChild(td);
+    }
+
+    appendElement(tr_element);
 }
 
 function add_hash() {
@@ -185,10 +193,8 @@ function input_keypress(event){
  * @param element to append
  */
 function appendElement(element){
-  var newdiv = document.createElement("div");
-  newdiv.appendChild(element);
   var container_element = document.getElementById("container");
-  container_element.appendChild(newdiv);
+  container_element.appendChild(element);
 }
 
 /**
@@ -198,7 +204,6 @@ function appendElement(element){
  * @param afetr_hash - not used
  */
 function showParameter(parameter, after_hash){
-  var p_element = document.createElement("p");
   var parameter_array = parameter.split(/=(.+)?/);
   if(parameter_array.length <2) {
     console.log("No parameter");
@@ -208,17 +213,18 @@ function showParameter(parameter, after_hash){
   text_input_element.type = "text";
   text_input_element.value = parameter_array[1];
   text_input_element.setAttribute("id", parameter_array[0]);
+  text_input_element.setAttribute("class", "parameter_value");
   text_input_element.addEventListener("keypress", input_keypress);
-  var b_element = document.createElement("b");
-  b_element.appendChild(document.createTextNode(parameter_array[0] + " = "));
-  p_element.appendChild(b_element);
-  p_element.appendChild(text_input_element);
+  var b_element = document.createElement("input");
+  b_element.setAttribute("type", "text");
+  b_element.setAttribute("disabled", "disabled");
+  b_element.setAttribute("class", "parameter_name");
+  b_element.setAttribute("value", parameter_array[0]);
   var img_element = document.createElement("img");
   img_element.addEventListener('click', delete_parameter, false);
   img_element.setAttribute("id", parameter_array[0]);
   img_element.src = '../images/delete.png';
-  p_element.appendChild(img_element);
-  appendElement(p_element);
+  add_new_row(b_element, text_input_element, img_element);
 }
 
 function delete_parameter(){
