@@ -211,7 +211,10 @@ function showParameter(parameter, after_hash){
   }
   var text_input_element = document.createElement("input");
   text_input_element.type = "text";
-  text_input_element.value = parameter_array[1];
+  if(parameter_array[1] !== undefined) {
+    text_input_element.value = parameter_array[1];
+  }
+
   text_input_element.setAttribute("id", parameter_array[0]);
   text_input_element.setAttribute("class", "parameter_value");
   text_input_element.addEventListener("keypress", input_keypress);
