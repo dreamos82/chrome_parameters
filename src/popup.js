@@ -49,7 +49,6 @@ function add_new_parameter(){
     var parameter_name_container = document.createElement("input");
     var parameter_value_container = document.createElement("input");
     var container = document.getElementById("container");
-    parameter_value_container.setAttribute("id", "new_parameter");
     parameter_value_container.setAttribute("class", "parameter_value");
     parameter_name_container.setAttribute("class", "parameter_name");
     parameter_name_container.setAttribute("type", "text");
@@ -57,7 +56,6 @@ function add_new_parameter(){
     parameter_name_container.onblur = function(){
         if(this.value!=""){
             var element = this.nextElementSibling;
-            element.setAttribute("id", this.value);
             var new_label = document.createElement("b");
             new_label.appendChild(document.createTextNode(this.value));
             element.parentElement.replaceChild(new_label, this);
@@ -93,20 +91,28 @@ function create_updated_url(url){
   console.log("Called ");
   var container_div = document.getElementById("container");
   console.log(container_div);
-  var parameters = container_div.getElementsByTagName("input");
+  var parameters = container_div.getElementsByTagName("tr");
   var url_split = url.split("?");
   if(url_split!=null){
     var new_url = url_split[0] + "?";
   }
-  for(i=0; i<parameters.length; i++){
-      if (parameters[i].getAttribute("id") == "hash") {
-          new_url = new_url+"#";
-          continue;
-      } else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
-        continue;
+  for(var i=0; i<parameters.length; i++){
+      var inputs = parameters[i].getElementsByTagName("input");
+      var name = '', value = '';
+      for(var j=0; j<inputs.length; j++){
+          if (inputs[j].getAttribute("id")) {
+              new_url = new_url+"#";
+              continue;
+          }
+
+          if (name) {
+            value = inputs[j].value;
+          } else {
+            name = inputs[j].value;
+          }
       }
-        
-      new_url = new_url + parameters[i].id + "=" + parameters[i].value;
+
+      new_url = new_url + name + "=" + value;
       if(i<parameters.length-1){
           new_url = new_url + "&";
       }
@@ -215,17 +221,14 @@ function showParameter(parameter, after_hash){
     text_input_element.value = parameter_array[1];
   }
 
-  text_input_element.setAttribute("id", parameter_array[0]);
   text_input_element.setAttribute("class", "parameter_value");
   text_input_element.addEventListener("keypress", input_keypress);
   var b_element = document.createElement("input");
   b_element.setAttribute("type", "text");
-  b_element.setAttribute("disabled", "disabled");
   b_element.setAttribute("class", "parameter_name");
   b_element.setAttribute("value", parameter_array[0]);
   var img_element = document.createElement("img");
   img_element.addEventListener('click', delete_parameter, false);
-  img_element.setAttribute("id", parameter_array[0]);
   img_element.src = '../images/delete.png';
   add_new_row(b_element, text_input_element, img_element);
 }
@@ -246,11 +249,21 @@ function delete_parameter(){
 function export_parameters_list(format){
 	console.log("Placeholder");
     var container_div = document.getElementById("container");
-    var parameters = container_div.getElementsByTagName("input");
+    var parameters = container_div.getElementsByTagName("tr");
     var parameters_array = new Array();
-    for(i=0; i<parameters.length; i++){   
-        console.log(parameters[i].getAttribute("id"));
-        parameters_array[parameters[i].getAttribute("id")] = parameters[i].value;
+    for(var i=0; i<parameters.length; i++){
+        var inputs = parameters[i].getElementsByTagName("input");
+        var name = '', value = '';
+        for(var j=0; j< inputs.length; j++) {
+            if(name) {
+              value = inputs[j].value;
+            } else {
+              name = inputs[j].value;
+            }
+        }
+
+        console.log(name);
+        parameters_array[name] = value;
     }
     var result = exporters[format](parameters_array);
     var link = document.createElement("a");
