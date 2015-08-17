@@ -3,14 +3,14 @@
  *
  * popup.js
  *
- * @version 1.1
+ * @version 1.3
  *
  */
 var exporters = {csv: create_csv};
 
 function click(e) {
 	console.log(e.target.id);
-	if(e.target.id=="close") { 
+	if(e.target.id=="close") {
 	  window.close();
 	  return;
 	} else if(e.target.id=="update"){
@@ -23,10 +23,10 @@ function click(e) {
     } else if(e.target.id=="import"){
         get_current_tab(function(tab){
             console.log("boh");
-            chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){                
+            chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){
                 console.log("aaah");
             });
-            
+
         });
     } else if(e.target.id=="social_button"){
         console.log("Show social bar");
@@ -42,7 +42,7 @@ function update_url(){
 		console.log(updated_url);
 		chrome.tabs.update(tab.id, {url: updated_url});
 		window.close();
-	});	
+	});
 }
 
 function add_new_parameter(){
@@ -55,12 +55,18 @@ function add_new_parameter(){
     parameter_name_container.setAttribute("type", "text");
     parameter_value_container.addEventListener("keypress", input_keypress);
     parameter_name_container.onblur = function(){
+			console.log(this);
         if(this.value!=""){
-            var element = this.nextElementSibling;
+            //var element = this.nextElementSibling;
+						var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
             element.setAttribute("id", this.value);
-            var new_label = document.createElement("b");
-            new_label.appendChild(document.createTextNode(this.value));
-            element.parentElement.replaceChild(new_label, this);
+            var new_label = document.createElement("input");
+            //new_label.appendChild(document.createTextNode(this.value));
+						new_label.className = "parameter_name";
+						new_label.disabled = true;
+						new_label.value = this.value;
+            //element.parentElement.replaceChild(new_label, this);
+						element.parentElement.childNodes[0].replaceChild(new_label, this);
         }
     };
     parameter_value_container.setAttribute("type", "text");
@@ -74,7 +80,6 @@ function add_new_row() {
       td.appendChild(arguments[i]);
       tr_element.appendChild(td);
     }
-
     appendElement(tr_element);
 }
 
@@ -98,6 +103,7 @@ function create_updated_url(url){
   if(url_split!=null){
     var new_url = url_split[0] + "?";
   }
+	debugger;
   for(i=0; i<parameters.length; i++){
       if (parameters[i].getAttribute("id") == "hash") {
           new_url = new_url+"#";
@@ -105,7 +111,7 @@ function create_updated_url(url){
       } else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
         continue;
       }
-        
+
       new_url = new_url + parameters[i].id + "=" + parameters[i].value;
       if(i<parameters.length-1){
           new_url = new_url + "&";
@@ -119,7 +125,7 @@ function get_current_tab(callback){
 		active: true,               // Select active tabs
 		lastFocusedWindow: true     // In the current window
 	}, function(array_of_Tabs) {
-		// Since there can only be one active tab in one active window, 
+		// Since there can only be one active tab in one active window,
 		//  the array has only one element
 		/*var tab = array_of_Tabs[0];
 		// Example:
@@ -184,12 +190,12 @@ function input_keypress(event){
 		update_url();
 	}
 	console.log(event.keyCode);
-	
+
 }
 
 /**
  * Append an element to the given element.
- * 
+ *
  * @param element to append
  */
 function appendElement(element){
@@ -198,7 +204,7 @@ function appendElement(element){
 }
 
 /**
- * Show a parameter line in extension popup. 
+ * Show a parameter line in extension popup.
  *
  * @param parameter - The parameter to show. The string format should be: parameter_name=parameter_value
  * @param afetr_hash - not used
@@ -211,7 +217,10 @@ function showParameter(parameter, after_hash){
   }
   var text_input_element = document.createElement("input");
   text_input_element.type = "text";
-  text_input_element.value = parameter_array[1];
+  if(parameter_array[1] !== undefined) {
+    text_input_element.value = parameter_array[1];
+  }
+
   text_input_element.setAttribute("id", parameter_array[0]);
   text_input_element.setAttribute("class", "parameter_value");
   text_input_element.addEventListener("keypress", input_keypress);
@@ -245,7 +254,7 @@ function export_parameters_list(format){
     var container_div = document.getElementById("container");
     var parameters = container_div.getElementsByTagName("input");
     var parameters_array = new Array();
-    for(i=0; i<parameters.length; i++){   
+    for(i=0; i<parameters.length; i++){
         console.log(parameters[i].getAttribute("id"));
         parameters_array[parameters[i].getAttribute("id")] = parameters[i].value;
     }
