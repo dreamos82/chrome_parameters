@@ -55,11 +55,10 @@ function add_new_parameter(){
     parameter_name_container.setAttribute("type", "text");
     parameter_value_container.addEventListener("keypress", input_keypress);
     parameter_name_container.onblur = function(){
-			debugger;
 			console.log(this);
         if(this.value!=""){
             //var element = this.nextElementSibling;
-						var element = this.parentElement.parentElement.childNodes[1];
+						var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
             element.setAttribute("id", this.value);
             var new_label = document.createElement("input");
             //new_label.appendChild(document.createTextNode(this.value));
@@ -81,7 +80,6 @@ function add_new_row() {
       td.appendChild(arguments[i]);
       tr_element.appendChild(td);
     }
-
     appendElement(tr_element);
 }
 
@@ -105,6 +103,7 @@ function create_updated_url(url){
   if(url_split!=null){
     var new_url = url_split[0] + "?";
   }
+	debugger;
   for(i=0; i<parameters.length; i++){
       if (parameters[i].getAttribute("id") == "hash") {
           new_url = new_url+"#";
