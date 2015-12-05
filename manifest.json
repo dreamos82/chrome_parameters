@@ -7,16 +7,13 @@
 
    "permissions": [
        "activeTab",
-       "webRequest",
-       "webRequestBlocking",
-       "*://*/*",
        "tabs", "<all_urls>",
        "webNavigation"
    ],
 
   "background": {
     "scripts": ["src/background.js"],
-    "persistent": true
+    "persistent": false
   },
 
   "page_action": {
