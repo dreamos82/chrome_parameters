@@ -3,14 +3,14 @@
  *
  * background.js
  *
- * @version 1.1
+ * @version 1.2
  *
  */
 
 var tag;
 
 /**
-* Get the url paramater identified by sParam  
+* Get the url paramater identified by sParam
 * @param {String} sParam The parameter that we want to read from url.
 * @return The parameter value if available, null otherwise
 */
@@ -69,3 +69,9 @@ chrome.runtime.onInstalled.addListener(function(details){
 	}
 	console.log("Reason: " + details.reason);
 });
+
+function lastError(){
+	if(chrome.runtime.lastError){
+		console.log(chrome.runtime.lastError.message);
+	}
+}

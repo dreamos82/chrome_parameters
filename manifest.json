@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Parameters Editor",
-  "version": "1.2",
+  "version": "1.3",
 
   "description": "Shows parameters used in the URL and allows to update, export and import them ",
 
@@ -15,11 +15,11 @@
     "scripts": ["src/background.js"],
     "persistent": false
   },
-    
+
   "page_action": {
     "default_title": "Show/Edit parameter for this URL",
     "default_icon": "images/icon.png",
     "default_popup": "src/popup.html"
   }
-  
-} 
+
+}
