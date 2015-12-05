@@ -22,9 +22,7 @@ function click(e) {
         export_parameters_list("csv");
     } else if(e.target.id=="import"){
         get_current_tab(function(tab){
-            console.log("boh");
             chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){
-                console.log("aaah");
             });
 
         });
