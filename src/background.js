@@ -70,15 +70,6 @@ chrome.runtime.onInstalled.addListener(function(details){
 	console.log("Reason: " + details.reason);
 });
 
-chrome.webRequest.onBeforeRequest.addListener(
-    function(details) {
-        if(details.method == "POST")
-            console.log(JSON.stringify(details));
-    },
-    {urls: ["<all_urls>"]},
-    ["blocking", "requestBody"]
-);
-
 function lastError(){
 	if(chrome.runtime.lastError){
 		console.log(chrome.runtime.lastError.message);
