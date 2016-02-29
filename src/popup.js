@@ -110,7 +110,7 @@ function create_updated_url(url){
         continue;
       }
 
-      new_url = new_url + parameters[i].id + "=" + parameters[i].value;
+      new_url = new_url + parameters[i].id + "=" + escape(parameters[i].value);
       if(i<parameters.length-1){
           new_url = new_url + "&";
       }
