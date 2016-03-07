@@ -250,7 +250,7 @@ function delete_parameter(){
 function export_parameters_list(format){
 	console.log("Placeholder");
     var container_div = document.getElementById("container");
-    var parameters = container_div.getElementsByTagName("input");
+    var parameters = container_div.getElementsByClassName("parameter_value");
     var parameters_array = new Array();
     for(i=0; i<parameters.length; i++){
         console.log(parameters[i].getAttribute("id"));
