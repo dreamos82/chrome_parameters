@@ -53,18 +53,18 @@ function add_new_parameter(){
     parameter_name_container.setAttribute("type", "text");
     parameter_value_container.addEventListener("keypress", input_keypress);
     parameter_name_container.onblur = function(){
-			console.log(this);
+	console.log(this);
         if(this.value!=""){
             //var element = this.nextElementSibling;
-						var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
+	    var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
             element.setAttribute("id", this.value);
             var new_label = document.createElement("input");
             //new_label.appendChild(document.createTextNode(this.value));
-						new_label.className = "parameter_name";
-						new_label.disabled = true;
-						new_label.value = this.value;
+	    new_label.className = "parameter_name";
+	    new_label.disabled = true;
+	    new_label.value = this.value;
             //element.parentElement.replaceChild(new_label, this);
-						element.parentElement.childNodes[0].replaceChild(new_label, this);
+	    element.parentElement.childNodes[0].replaceChild(new_label, this);
         }
     };
     parameter_value_container.setAttribute("type", "text");
@@ -110,7 +110,7 @@ function create_updated_url(url){
         continue;
       }
 
-      new_url = new_url + parameters[i].id + "=" + parameters[i].value;
+      new_url = new_url + parameters[i].id + "=" + escape(parameters[i].value);
       if(i<parameters.length-1){
           new_url = new_url + "&";
       }
@@ -216,7 +216,7 @@ function showParameter(parameter, after_hash){
   var text_input_element = document.createElement("input");
   text_input_element.type = "text";
   if(parameter_array[1] !== undefined) {
-    text_input_element.value = parameter_array[1];
+    text_input_element.value = unescape(parameter_array[1]);
   }
 
   text_input_element.setAttribute("id", parameter_array[0]);
@@ -250,7 +250,7 @@ function delete_parameter(){
 function export_parameters_list(format){
 	console.log("Placeholder");
     var container_div = document.getElementById("container");
-    var parameters = container_div.getElementsByTagName("input");
+    var parameters = container_div.getElementsByClassName("parameter_value");
     var parameters_array = new Array();
     for(i=0; i<parameters.length; i++){
         console.log(parameters[i].getAttribute("id"));
