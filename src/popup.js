@@ -10,10 +10,7 @@ var exporters = {csv: create_csv};
 
 function click(e) {
 	console.log(e.target.id);
-	if(e.target.id=="close") {
-	  window.close();
-	  return;
-	} else if(e.target.id=="update"){
+	if(e.target.id=="update"){
 	  update_url();
 	} else if(e.target.id=="addnew") {
         console.log("Add new parameter");
