@@ -3,7 +3,7 @@
  *
  * popup.js
  *
- * @version 1.3
+ * @version 1.5
  *
  */
 var exporters = {csv: create_csv};
@@ -20,8 +20,7 @@ function click(e) {
     } else if(e.target.id=="import"){
         get_current_tab(function(tab){
             chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){
-            });
-
+        		});
         });
     } else if(e.target.id=="social_button"){
         console.log("Show social bar");
