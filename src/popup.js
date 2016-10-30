@@ -13,20 +13,19 @@ function click(e) {
 	if(e.target.id=="update"){
 	  update_url();
 	} else if(e.target.id=="addnew") {
-        console.log("Add new parameter");
-        add_new_parameter();
-    } else if(e.target.id=="export"){
-        export_parameters_list("csv");
-    } else if(e.target.id=="import"){
-        get_current_tab(function(tab){
-            chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){
-        		});
-        });
-    } else if(e.target.id=="social_button"){
-        console.log("Show social bar");
-        var element = document.getElementById("social_bar")
-        element.style.display = "block";
-    }
+    console.log("Add new parameter");
+    add_new_parameter();
+	} else if(e.target.id=="export"){
+    export_parameters_list("csv");
+  } else if(e.target.id=="import"){
+    get_current_tab(function(tab){
+    chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
+    });
+  } else if(e.target.id=="social_button"){
+    console.log("Show social bar");
+    var element = document.getElementById("social_bar")
+    element.style.display = "block";
+  }
 }
 
 function update_url(){
@@ -40,41 +39,41 @@ function update_url(){
 }
 
 function add_new_parameter(){
-    var parameter_name_container = document.createElement("input");
-    var parameter_value_container = document.createElement("input");
-    var container = document.getElementById("container");
-    parameter_value_container.setAttribute("id", "new_parameter");
-    parameter_value_container.setAttribute("class", "parameter_value");
-    parameter_name_container.setAttribute("class", "parameter_name");
-    parameter_name_container.setAttribute("type", "text");
-    parameter_value_container.addEventListener("keypress", input_keypress);
-    parameter_name_container.onblur = function(){
-			console.log(this);
-    	if(this.value!=""){
-    		//var element = this.nextElementSibling;
-	    	var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
-      	element.setAttribute("id", this.value);
-      	var new_label = document.createElement("input");
-      	//new_label.appendChild(document.createTextNode(this.value));
-	    	new_label.className = "parameter_name";
-	    	new_label.disabled = true;
-	    	new_label.value = this.value;
-      	//element.parentElement.replaceChild(new_label, this);
-	    	element.parentElement.childNodes[0].replaceChild(new_label, this);
-      	}
-    	};
-    parameter_value_container.setAttribute("type", "text");
-    add_new_row(parameter_name_container, parameter_value_container);
+  var parameter_name_container = document.createElement("input");
+  var parameter_value_container = document.createElement("input");
+  var container = document.getElementById("container");
+  parameter_value_container.setAttribute("id", "new_parameter");
+  parameter_value_container.setAttribute("class", "parameter_value");
+  parameter_name_container.setAttribute("class", "parameter_name");
+  parameter_name_container.setAttribute("type", "text");
+  parameter_value_container.addEventListener("keypress", input_keypress);
+  parameter_name_container.onblur = function(){
+		console.log(this);
+  	if(this.value!=""){
+  	//var element = this.nextElementSibling;
+		var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
+  	element.setAttribute("id", this.value);
+  	var new_label = document.createElement("input");
+  	//new_label.appendChild(document.createTextNode(this.value));
+		new_label.className = "parameter_name";
+		new_label.disabled = true;
+		new_label.value = this.value;
+  	//element.parentElement.replaceChild(new_label, this);
+		element.parentElement.childNodes[0].replaceChild(new_label, this);
+  	}
+  };
+  parameter_value_container.setAttribute("type", "text");
+  add_new_row(parameter_name_container, parameter_value_container);
 }
 
 function add_new_row() {
-    var tr_element = document.createElement("tr");
-    for(var i in arguments) {
-      var td = document.createElement("td");
-      td.appendChild(arguments[i]);
-      tr_element.appendChild(td);
-    }
-    appendElement(tr_element);
+  var tr_element = document.createElement("tr");
+  for(var i in arguments) {
+    var td = document.createElement("td");
+    td.appendChild(arguments[i]);
+    tr_element.appendChild(td);
+  }
+  appendElement(tr_element);
 }
 
 function add_hash() {
@@ -95,26 +94,26 @@ function create_updated_url(url){
   var parameters = container_div.getElementsByTagName("input");
   var url_split = url.split("?");
   if(url_split!=null){
-    var new_url = url_split[0] + "?";
-  }
+  	var new_url = url_split[0] + "?";
+	}
 
   for(i=0; i<parameters.length; i++){
-      if (parameters[i].getAttribute("id") == "hash") {
-          new_url = new_url+"#";
-          continue;
-      } else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
-        continue;
-      }
+    if (parameters[i].getAttribute("id") == "hash") {
+      new_url = new_url+"#";
+      continue;
+    } else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
+      continue;
+    }
 
-			new_url = new_url + parameters[i].id;
+		new_url = new_url + parameters[i].id;
 
-			if(parameters[i].value){
-				new_url = new_url + "=" + escape(parameters[i].value);
-			}
+		if(parameters[i].value){
+			new_url = new_url + "=" + escape(parameters[i].value);
+		}
 
-      if(i<parameters.length-1){
-          new_url = new_url + "&";
-      }
+    if(i<parameters.length-1){
+      new_url = new_url + "&";
+    }
   }
   return new_url;
 }
@@ -140,33 +139,33 @@ function parse_url(current_url){
 	var i = current_url.indexOf('?');
 	var j = current_url.indexOf('#');
 	if(i>0 && i!= current_url.length-1){
-		console.log("parameters found!!");
-		if (j>i) {
-			parameter_url = current_url.substring(++i, j);
-		} else {
-			parameter_url = current_url.substring(++i);
-		}
-		console.log(parameter_url);
-		var result = parameter_url.split("&");
-		console.log(parameter_url.length);
-		document.getElementById("container").innerHTML = "";
+	console.log("parameters found!!");
+	if (j>i) {
+		parameter_url = current_url.substring(++i, j);
+	} else {
+		parameter_url = current_url.substring(++i);
+	}
+	console.log(parameter_url);
+	var result = parameter_url.split("&");
+	console.log(parameter_url.length);
+	document.getElementById("container").innerHTML = "";
 
-		for(i=0;i<result.length && result.length>0; i++){
-		 showParameter(result[i]);
-		}
-		if(j>i){
-			/*Improve this piece of code*/
-			console.log("A: " + current_url.substring(current_url.indexOf("#")));
-			console.log("B: " + current_url.substring(current_url.indexOf("?"), j));
-			var sub_result = current_url.substring(++j);
-			var sub_array = sub_result.split("&");
-			add_hash();
-			var k = 0;
-			for(k=0;k<sub_array.length && sub_array.length>0; k++){
-				console.log(sub_array[k]);
-				showParameter(sub_array[k]);
+	for(i=0;i<result.length && result.length>0; i++){
+	 showParameter(result[i]);
+	}
+	if(j>i){
+		/*Improve this piece of code*/
+		console.log("A: " + current_url.substring(current_url.indexOf("#")));
+		console.log("B: " + current_url.substring(current_url.indexOf("?"), j));
+		var sub_result = current_url.substring(++j);
+		var sub_array = sub_result.split("&");
+		add_hash();
+		var k = 0;
+		for(k=0;k<sub_array.length && sub_array.length>0; k++){
+			console.log(sub_array[k]);
+			showParameter(sub_array[k]);
 			}
-			console.log("End");
+		console.log("End");
 		}
 	}
 }
@@ -175,12 +174,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var divs = document.querySelectorAll('div');
   for (var i = 0; i < divs.length; i++) {
 	console.log("added");
-    if(divs[i]!="other_buttons"){
-      divs[i].addEventListener('click', click);
-    }
+  if(divs[i]!="other_buttons"){
+    divs[i].addEventListener('click', click);
+  	}
   }
-    get_current_tab(function(tab){
-	    parse_url(tab.url);
+  get_current_tab(function(tab){
+	  parse_url(tab.url);
 	});
 });
 
@@ -189,7 +188,6 @@ function input_keypress(event){
 		update_url();
 	}
 	console.log(event.keyCode);
-
 }
 
 /**
