@@ -17,15 +17,15 @@ function click(e) {
     add_new_parameter();
 	} else if(e.target.id=="export"){
     export_parameters_list("csv");
-  } else if(e.target.id=="import"){
+	} else if(e.target.id=="import"){
     get_current_tab(function(tab){
-    chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
-    });
-  } else if(e.target.id=="social_button"){
-    console.log("Show social bar");
-    var element = document.getElementById("social_bar")
-    element.style.display = "block";
-  }
+		chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
+		});
+	} else if(e.target.id=="social_button"){
+		console.log("Show social bar");
+		var element = document.getElementById("social_bar")
+		element.style.display = "block";
+	}
 }
 
 function update_url(){
@@ -39,41 +39,41 @@ function update_url(){
 }
 
 function add_new_parameter(){
-  var parameter_name_container = document.createElement("input");
-  var parameter_value_container = document.createElement("input");
-  var container = document.getElementById("container");
-  parameter_value_container.setAttribute("id", "new_parameter");
-  parameter_value_container.setAttribute("class", "parameter_value");
-  parameter_name_container.setAttribute("class", "parameter_name");
-  parameter_name_container.setAttribute("type", "text");
-  parameter_value_container.addEventListener("keypress", input_keypress);
-  parameter_name_container.onblur = function(){
-		console.log(this);
+	var parameter_name_container = document.createElement("input");
+	var parameter_value_container = document.createElement("input");
+	var container = document.getElementById("container");
+	parameter_value_container.setAttribute("id", "new_parameter");
+	parameter_value_container.setAttribute("class", "parameter_value");
+	parameter_name_container.setAttribute("class", "parameter_name");
+	parameter_name_container.setAttribute("type", "text");
+	parameter_value_container.addEventListener("keypress", input_keypress);
+	parameter_name_container.onblur = function(){
+	console.log(this);
   	if(this.value!=""){
-  	//var element = this.nextElementSibling;
+		//var element = this.nextElementSibling;
 		var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
-  	element.setAttribute("id", this.value);
-  	var new_label = document.createElement("input");
-  	//new_label.appendChild(document.createTextNode(this.value));
+		element.setAttribute("id", this.value);
+		var new_label = document.createElement("input");
+		//new_label.appendChild(document.createTextNode(this.value));
 		new_label.className = "parameter_name";
 		new_label.disabled = true;
 		new_label.value = this.value;
-  	//element.parentElement.replaceChild(new_label, this);
+		//element.parentElement.replaceChild(new_label, this);
 		element.parentElement.childNodes[0].replaceChild(new_label, this);
-  	}
-  };
-  parameter_value_container.setAttribute("type", "text");
-  add_new_row(parameter_name_container, parameter_value_container);
+		}
+	};
+	parameter_value_container.setAttribute("type", "text");
+	add_new_row(parameter_name_container, parameter_value_container);
 }
 
 function add_new_row() {
-  var tr_element = document.createElement("tr");
-  for(var i in arguments) {
-    var td = document.createElement("td");
-    td.appendChild(arguments[i]);
-    tr_element.appendChild(td);
-  }
-  appendElement(tr_element);
+	var tr_element = document.createElement("tr");
+	for(var i in arguments) {
+		var td = document.createElement("td");
+		td.appendChild(arguments[i]);
+		tr_element.appendChild(td);
+	}
+	appendElement(tr_element);
 }
 
 function add_hash() {
@@ -88,22 +88,22 @@ function add_hash() {
 }
 
 function create_updated_url(url){
-  console.log("Called ");
-  var container_div = document.getElementById("container");
-  console.log(container_div);
-  var parameters = container_div.getElementsByTagName("input");
-  var url_split = url.split("?");
-  if(url_split!=null){
-  	var new_url = url_split[0] + "?";
-	}
+	console.log("Called ");
+	var container_div = document.getElementById("container");
+	console.log(container_div);
+	var parameters = container_div.getElementsByTagName("input");
+	var url_split = url.split("?");
+	if(url_split!=null){
+		var new_url = url_split[0] + "?";
+		}
 
-  for(i=0; i<parameters.length; i++){
-    if (parameters[i].getAttribute("id") == "hash") {
-      new_url = new_url+"#";
-      continue;
-    } else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
-      continue;
-    }
+	for(i=0; i<parameters.length; i++){
+		if (parameters[i].getAttribute("id") == "hash") {
+			new_url = new_url+"#";
+			continue;
+		} else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
+			continue;
+		}
 
 		new_url = new_url + parameters[i].id;
 
@@ -111,15 +111,15 @@ function create_updated_url(url){
 			new_url = new_url + "=" + escape(parameters[i].value);
 		}
 
-    if(i<parameters.length-1){
-      new_url = new_url + "&";
-    }
-  }
-  return new_url;
+		if(i<parameters.length-1){
+		new_url = new_url + "&";
+		}
+	}
+	return new_url;
 }
 
 function get_current_tab(callback){
-  chrome.tabs.query({
+	chrome.tabs.query({
 		active: true,               // Select active tabs
 		lastFocusedWindow: true     // In the current window
 	}, function(array_of_Tabs) {
@@ -151,7 +151,7 @@ function parse_url(current_url){
 	document.getElementById("container").innerHTML = "";
 
 	for(i=0;i<result.length && result.length>0; i++){
-	 showParameter(result[i]);
+		showParameter(result[i]);
 	}
 	if(j>i){
 		/*Improve this piece of code*/
@@ -171,15 +171,15 @@ function parse_url(current_url){
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var divs = document.querySelectorAll('div');
-  for (var i = 0; i < divs.length; i++) {
-	console.log("added");
-  if(divs[i]!="other_buttons"){
-    divs[i].addEventListener('click', click);
-  	}
-  }
-  get_current_tab(function(tab){
-	  parse_url(tab.url);
+	var divs = document.querySelectorAll('div');
+	for (var i = 0; i < divs.length; i++) {
+		console.log("added");
+		if(divs[i]!="other_buttons"){
+			divs[i].addEventListener('click', click);
+		}
+	}
+	get_current_tab(function(tab){
+		parse_url(tab.url);
 	});
 });
 
@@ -196,8 +196,8 @@ function input_keypress(event){
  * @param element to append
  */
 function appendElement(element){
-  var container_element = document.getElementById("container");
-  container_element.appendChild(element);
+	var container_element = document.getElementById("container");
+	container_element.appendChild(element);
 }
 
 /**
@@ -207,31 +207,31 @@ function appendElement(element){
  * @param afetr_hash - not used
  */
 function showParameter(parameter, after_hash){
-  var parameter_array = parameter.split(/=(.+)?/);
+	var parameter_array = parameter.split(/=(.+)?/);
 	console.log("Par: " + parameter);
-  if(parameter_array.length <1) {
-    console.log("No parameter");
-    return;
-  }
-  var text_input_element = document.createElement("input");
-  text_input_element.type = "text";
-  if(parameter_array[1] !== undefined) {
-    text_input_element.value = unescape(parameter_array[1]);
-  }
+	if(parameter_array.length <1) {
+		console.log("No parameter");
+		return;
+	}
+	var text_input_element = document.createElement("input");
+	text_input_element.type = "text";
+	if(parameter_array[1] !== undefined) {
+		text_input_element.value = unescape(parameter_array[1]);
+	}
 
-  text_input_element.setAttribute("id", parameter_array[0]);
-  text_input_element.setAttribute("class", "parameter_value");
-  text_input_element.addEventListener("keypress", input_keypress);
-  var b_element = document.createElement("input");
-  b_element.setAttribute("type", "text");
-  b_element.setAttribute("disabled", "disabled");
-  b_element.setAttribute("class", "parameter_name");
-  b_element.setAttribute("value", parameter_array[0]);
-  var img_element = document.createElement("img");
-  img_element.addEventListener('click', delete_parameter, false);
-  img_element.setAttribute("id", parameter_array[0]);
-  img_element.src = '../images/delete.png';
-  add_new_row(b_element, text_input_element, img_element);
+	text_input_element.setAttribute("id", parameter_array[0]);
+	text_input_element.setAttribute("class", "parameter_value");
+	text_input_element.addEventListener("keypress", input_keypress);
+	var b_element = document.createElement("input");
+	b_element.setAttribute("type", "text");
+	b_element.setAttribute("disabled", "disabled");
+	b_element.setAttribute("class", "parameter_name");
+	b_element.setAttribute("value", parameter_array[0]);
+	var img_element = document.createElement("img");
+	img_element.addEventListener('click', delete_parameter, false);
+	img_element.setAttribute("id", parameter_array[0]);
+	img_element.src = '../images/delete.png';
+	add_new_row(b_element, text_input_element, img_element);
 }
 
 function delete_parameter(){
