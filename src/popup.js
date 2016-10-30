@@ -115,7 +115,7 @@ function create_updated_url(url){
 			if(parameters[i].value){
 				new_url = new_url + "=" + escape(parameters[i].value);
 			}
-			
+
       if(i<parameters.length-1){
           new_url = new_url + "&";
       }
@@ -214,7 +214,8 @@ function appendElement(element){
  */
 function showParameter(parameter, after_hash){
   var parameter_array = parameter.split(/=(.+)?/);
-  if(parameter_array.length <2) {
+	console.log("Par: " + parameter);
+  if(parameter_array.length <1) {
     console.log("No parameter");
     return;
   }
