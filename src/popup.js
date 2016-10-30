@@ -53,20 +53,20 @@ function add_new_parameter(){
     parameter_name_container.setAttribute("type", "text");
     parameter_value_container.addEventListener("keypress", input_keypress);
     parameter_name_container.onblur = function(){
-	console.log(this);
-        if(this.value!=""){
-            //var element = this.nextElementSibling;
-	    var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
-            element.setAttribute("id", this.value);
-            var new_label = document.createElement("input");
-            //new_label.appendChild(document.createTextNode(this.value));
-	    new_label.className = "parameter_name";
-	    new_label.disabled = true;
-	    new_label.value = this.value;
-            //element.parentElement.replaceChild(new_label, this);
-	    element.parentElement.childNodes[0].replaceChild(new_label, this);
-        }
-    };
+			console.log(this);
+    	if(this.value!=""){
+    		//var element = this.nextElementSibling;
+	    	var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
+      	element.setAttribute("id", this.value);
+      	var new_label = document.createElement("input");
+      	//new_label.appendChild(document.createTextNode(this.value));
+	    	new_label.className = "parameter_name";
+	    	new_label.disabled = true;
+	    	new_label.value = this.value;
+      	//element.parentElement.replaceChild(new_label, this);
+	    	element.parentElement.childNodes[0].replaceChild(new_label, this);
+      	}
+    	};
     parameter_value_container.setAttribute("type", "text");
     add_new_row(parameter_name_container, parameter_value_container);
 }
@@ -101,7 +101,7 @@ function create_updated_url(url){
   if(url_split!=null){
     var new_url = url_split[0] + "?";
   }
-	debugger;
+
   for(i=0; i<parameters.length; i++){
       if (parameters[i].getAttribute("id") == "hash") {
           new_url = new_url+"#";
@@ -110,7 +110,12 @@ function create_updated_url(url){
         continue;
       }
 
-      new_url = new_url + parameters[i].id + "=" + escape(parameters[i].value);
+			new_url = new_url + parameters[i].id;
+
+			if(parameters[i].value){
+				new_url = new_url + "=" + escape(parameters[i].value);
+			}
+			
       if(i<parameters.length-1){
           new_url = new_url + "&";
       }
