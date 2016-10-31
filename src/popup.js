@@ -50,7 +50,6 @@ function add_new_parameter(){
 	parameter_name_container.onblur = function(){
 	console.log(this);
   	if(this.value!=""){
-		//var element = this.nextElementSibling;
 		var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
 		element.setAttribute("id", this.value);
 		var new_label = document.createElement("input");
@@ -58,7 +57,6 @@ function add_new_parameter(){
 		new_label.className = "parameter_name";
 		new_label.disabled = true;
 		new_label.value = this.value;
-		//element.parentElement.replaceChild(new_label, this);
 		element.parentElement.childNodes[0].replaceChild(new_label, this);
 		}
 	};
@@ -88,16 +86,19 @@ function add_hash() {
 }
 
 function create_updated_url(url){
-	console.log("Called ");
 	var container_div = document.getElementById("container");
 	console.log(container_div);
 	var parameters = container_div.getElementsByTagName("input");
+	var parameters2 = container_div.getElementsByTagName("tr");
 	var url_split = url.split("?");
 	if(url_split!=null){
 		var new_url = url_split[0] + "?";
-		}
+	}
 
 	for(i=0; i<parameters.length; i++){
+		var row_parameters = parameters2[i].getElementsByTagName("input");
+		console.log(row_parameters[0]);
+		console.log(row_parameters[1]);
 		if (parameters[i].getAttribute("id") == "hash") {
 			new_url = new_url+"#";
 			continue;
@@ -224,7 +225,6 @@ function showParameter(parameter, after_hash){
 	text_input_element.addEventListener("keypress", input_keypress);
 	var b_element = document.createElement("input");
 	b_element.setAttribute("type", "text");
-	b_element.setAttribute("disabled", "disabled");
 	b_element.setAttribute("class", "parameter_name");
 	b_element.setAttribute("value", parameter_array[0]);
 	var img_element = document.createElement("img");
