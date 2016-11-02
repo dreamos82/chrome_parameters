@@ -88,17 +88,36 @@ function add_hash() {
 function create_updated_url(url){
 	var container_div = document.getElementById("container");
 	console.log(container_div);
-	var parameters = container_div.getElementsByTagName("input");
-	var parameters2 = container_div.getElementsByTagName("tr");
+	//var parameters = container_div.getElementsByTagName("input");
+	var parameters = container_div.getElementsByTagName("tr");
 	var url_split = url.split("?");
 	if(url_split!=null){
 		var new_url = url_split[0] + "?";
 	}
 
 	for(i=0; i<parameters.length; i++){
-		var row_parameters = parameters2[i].getElementsByTagName("input");
-		console.log(row_parameters[0]);
-		console.log(row_parameters[1]);
+		var row_parameters = parameters[i].getElementsByTagName("input");
+		var parameter_name = row_parameters[0].value
+		var parameter_value = row_parameters[1].value
+		if (parameter_name == "hash") {
+			new_url = new_url+"#";
+			continue;
+		} else if(parameter_name == "new_parameter" || parameter_name == undefined ) {
+			continue;
+		}
+
+		new_url = new_url + parameter_name;
+
+		if(parameters[i].value){
+			new_url = new_url + "=" + escape(parameter_value);
+		}
+
+		if(i<parameters.length-1){
+		new_url = new_url + "&";
+		}
+	}
+
+	/*for(i=0; i<parameters.length; i++){
 		if (parameters[i].getAttribute("id") == "hash") {
 			new_url = new_url+"#";
 			continue;
@@ -115,7 +134,7 @@ function create_updated_url(url){
 		if(i<parameters.length-1){
 		new_url = new_url + "&";
 		}
-	}
+	}*/
 	return new_url;
 }
 
@@ -124,14 +143,6 @@ function get_current_tab(callback){
 		active: true,               // Select active tabs
 		lastFocusedWindow: true     // In the current window
 	}, function(array_of_Tabs) {
-		// Since there can only be one active tab in one active window,
-		//  the array has only one element
-		/*var tab = array_of_Tabs[0];
-		// Example:
-		var url = tab.url;
-		alert("Url: " + url);
-		// ... do something with url variable
-		new_url = url;*/
 		callback(array_of_Tabs[0]);
 	});
 }
