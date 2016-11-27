@@ -11,15 +11,15 @@ var exporters = {csv: create_csv};
 function click(e) {
 	console.log(e.target.id);
 	if(e.target.id=="update"){
-	  update_url();
+		update_url();
 	} else if(e.target.id=="addnew") {
-    console.log("Add new parameter");
-    add_new_parameter();
+		console.log("Add new parameter");
+		add_new_parameter();
 	} else if(e.target.id=="export"){
-    export_parameters_list("csv");
+		export_parameters_list("csv");
 	} else if(e.target.id=="import"){
-    get_current_tab(function(tab){
-		chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
+		get_current_tab(function(tab){
+			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
 		console.log("Show social bar");
