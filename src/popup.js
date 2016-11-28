@@ -108,7 +108,7 @@ function create_updated_url(url){
 
 		new_url = new_url + parameter_name;
 
-		if(parameters[i].value){
+		if(parameter_value){
 			new_url = new_url + "=" + escape(parameter_value);
 		}
 
@@ -117,7 +117,8 @@ function create_updated_url(url){
 		}
 	}
 
-	/*for(i=0; i<parameters.length; i++){
+	/*TO DElETE!
+	 * for(i=0; i<parameters.length; i++){
 		if (parameters[i].getAttribute("id") == "hash") {
 			new_url = new_url+"#";
 			continue;
