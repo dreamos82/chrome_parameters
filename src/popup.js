@@ -11,15 +11,15 @@ var exporters = {csv: create_csv};
 function click(e) {
 	console.log(e.target.id);
 	if(e.target.id=="update"){
-	  update_url();
+		update_url();
 	} else if(e.target.id=="addnew") {
-    console.log("Add new parameter");
-    add_new_parameter();
+		console.log("Add new parameter");
+		add_new_parameter();
 	} else if(e.target.id=="export"){
-    export_parameters_list("csv");
+		export_parameters_list("csv");
 	} else if(e.target.id=="import"){
-    get_current_tab(function(tab){
-		chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
+		get_current_tab(function(tab){
+			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
 		console.log("Show social bar");
@@ -50,7 +50,6 @@ function add_new_parameter(){
 	parameter_name_container.onblur = function(){
 	console.log(this);
   	if(this.value!=""){
-		//var element = this.nextElementSibling;
 		var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
 		element.setAttribute("id", this.value);
 		var new_label = document.createElement("input");
@@ -58,7 +57,6 @@ function add_new_parameter(){
 		new_label.className = "parameter_name";
 		new_label.disabled = true;
 		new_label.value = this.value;
-		//element.parentElement.replaceChild(new_label, this);
 		element.parentElement.childNodes[0].replaceChild(new_label, this);
 		}
 	};
@@ -88,33 +86,37 @@ function add_hash() {
 }
 
 function create_updated_url(url){
-	console.log("Called ");
 	var container_div = document.getElementById("container");
 	console.log(container_div);
-	var parameters = container_div.getElementsByTagName("input");
+	//var parameters = container_div.getElementsByTagName("input");
+	var parameters = container_div.getElementsByTagName("tr");
 	var url_split = url.split("?");
 	if(url_split!=null){
 		var new_url = url_split[0] + "?";
-		}
+	}
 
 	for(i=0; i<parameters.length; i++){
-		if (parameters[i].getAttribute("id") == "hash") {
+		var row_parameters = parameters[i].getElementsByTagName("input");
+		var parameter_name = row_parameters[0].value
+		var parameter_value = row_parameters[1].value
+		if (parameter_name == "hash") {
 			new_url = new_url+"#";
 			continue;
-		} else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
+		} else if(parameter_name == "new_parameter" || parameter_name == undefined ) {
 			continue;
 		}
 
-		new_url = new_url + parameters[i].id;
+		new_url = new_url + parameter_name;
 
-		if(parameters[i].value){
-			new_url = new_url + "=" + escape(parameters[i].value);
+		if(parameter_value){
+			new_url = new_url + "=" + escape(parameter_value);
 		}
 
 		if(i<parameters.length-1){
 		new_url = new_url + "&";
 		}
 	}
+
 	return new_url;
 }
 
@@ -123,14 +125,6 @@ function get_current_tab(callback){
 		active: true,               // Select active tabs
 		lastFocusedWindow: true     // In the current window
 	}, function(array_of_Tabs) {
-		// Since there can only be one active tab in one active window,
-		//  the array has only one element
-		/*var tab = array_of_Tabs[0];
-		// Example:
-		var url = tab.url;
-		alert("Url: " + url);
-		// ... do something with url variable
-		new_url = url;*/
 		callback(array_of_Tabs[0]);
 	});
 }
@@ -224,7 +218,6 @@ function showParameter(parameter, after_hash){
 	text_input_element.addEventListener("keypress", input_keypress);
 	var b_element = document.createElement("input");
 	b_element.setAttribute("type", "text");
-	b_element.setAttribute("disabled", "disabled");
 	b_element.setAttribute("class", "parameter_name");
 	b_element.setAttribute("value", parameter_array[0]);
 	var img_element = document.createElement("img");
