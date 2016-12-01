@@ -117,25 +117,6 @@ function create_updated_url(url){
 		}
 	}
 
-	/*TO DElETE!
-	 * for(i=0; i<parameters.length; i++){
-		if (parameters[i].getAttribute("id") == "hash") {
-			new_url = new_url+"#";
-			continue;
-		} else if(parameters[i].getAttribute("id") == "new_parameter" || parameters[i].getAttribute("id") == undefined ) {
-			continue;
-		}
-
-		new_url = new_url + parameters[i].id;
-
-		if(parameters[i].value){
-			new_url = new_url + "=" + escape(parameters[i].value);
-		}
-
-		if(i<parameters.length-1){
-		new_url = new_url + "&";
-		}
-	}*/
 	return new_url;
 }
 
