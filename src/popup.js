@@ -130,28 +130,28 @@ function get_current_tab(callback){
 }
 
 function parse_url(current_url){
-	var i = current_url.indexOf('?');
-	var j = current_url.indexOf('#');
-	if(i>0 && i!= current_url.length-1){
+	var par_start = current_url.indexOf('?');
+	var hash_position = current_url.lastIndexOf('#');
+	if(par_start>0 && par_start!= current_url.length-1){
 	console.log("parameters found!!");
-	if (j>i) {
-		parameter_url = current_url.substring(++i, j);
+	if (hash_position>par_start) {
+		parameter_url = current_url.substring(++par_start, hash_position);
 	} else {
-		parameter_url = current_url.substring(++i);
+		parameter_url = current_url.substring(++par_start);
 	}
 	console.log(parameter_url);
 	var result = parameter_url.split("&");
 	console.log(parameter_url.length);
 	document.getElementById("container").innerHTML = "";
 
-	for(i=0;i<result.length && result.length>0; i++){
+	for(var i=0;i<result.length && result.length>0; i++){
 		showParameter(result[i]);
 	}
-	if(j>i){
+	if(hash_position>par_start){
 		/*Improve this piece of code*/
 		console.log("A: " + current_url.substring(current_url.indexOf("#")));
-		console.log("B: " + current_url.substring(current_url.indexOf("?"), j));
-		var sub_result = current_url.substring(++j);
+		console.log("B: " + current_url.substring(current_url.indexOf("?"), hash_position));
+		var sub_result = current_url.substring(++hash_position);
 		var sub_array = sub_result.split("&");
 		add_hash();
 		var k = 0;
