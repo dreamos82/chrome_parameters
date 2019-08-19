@@ -31,10 +31,8 @@
             display: none;
         }
 
-        #report_bug a:link { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
-        #report_bug a:visited { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
-        #social_link a:link { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
-        #social_link a:visited { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
+        .external_link a:link { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
+        .external_link a:visited { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
 
     </style>
 
@@ -60,10 +58,10 @@
 	    <input id="myInput" type="file" style="display:none" />
 	  </div>
       <div>
-          <div id="report_bug">
-          <a href="https://github.com/c103/chrome_parameters/issues/new" target="_blank">Report a bug</a>
+        <div id="report_bug">
+          <a href="https://github.com/c103/chrome_parameters/issues/new" target="_blank">Create a bug/suggestion</a>
         </div>
-        <div id="social_link">
+        <div id="social_link" class="external_link">
           <a id="social_button" href="#">Like it...</a>
         </div>
       </div>
