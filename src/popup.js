@@ -8,6 +8,15 @@
  */
 var exporters = {csv: create_csv};
 
+/*
+ * This code snippet is needed to detect if we are on browser_handler.or firefox*/
+if(typeof(browser)==='undefined'){
+		browser_handler = chrome;
+} else {
+		browser_handler = browser;
+}
+
+
 function click(e) {
 	console.log(e.target.id);
 	if(e.target.id=="update"){
@@ -19,7 +28,7 @@ function click(e) {
 		export_parameters_list("csv");
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
-			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
+			browser_handler.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
 		console.log("Show social bar");
@@ -33,7 +42,7 @@ function update_url(){
 		console.log("Creating new Url");
 		var updated_url = create_updated_url(tab.url);
 		console.log(updated_url);
-		chrome.tabs.update(tab.id, {url: updated_url});
+		browser_handler.tabs.update(tab.id, {url: updated_url});
 		window.close();
 	});
 }
@@ -121,7 +130,7 @@ function create_updated_url(url){
 }
 
 function get_current_tab(callback){
-	chrome.tabs.query({
+	browser_handler.tabs.query({
 		active: true,               // Select active tabs
 		lastFocusedWindow: true     // In the current window
 	}, function(array_of_Tabs) {
