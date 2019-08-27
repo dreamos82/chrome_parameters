@@ -7,13 +7,16 @@
  *
  */
 var exporters = {csv: create_csv};
-
+var browser_handler;
+var isChrome;
 /*
  * This code snippet is needed to detect if we are on browser_handler.or firefox*/
 if(typeof(browser)==='undefined'){
 		browser_handler = chrome;
+		isChrome = true;
 } else {
 		browser_handler = browser;
+		isChrome = false;
 }
 
 
@@ -28,7 +31,11 @@ function click(e) {
 		export_parameters_list("csv");
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
-			browser_handler.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
+				var externalScript = "src/content_script.js";
+				if(!isChrome){
+						externalScript = "content_script.js"
+				}
+			browser_handler.tabs.executeScript(tab.id, {file: externalScript}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
 		console.log("Show social bar");
@@ -263,7 +270,13 @@ function export_parameters_list(format){
     var date = new Date();
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
     link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
+    if(!isChrome){
+			document.body.appendChild(link);
+	}
     link.click();
+    if(!isChrome){
+			document.body.removeChild(link);
+	}
 }
 
 /**
