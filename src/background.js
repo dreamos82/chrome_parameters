@@ -1,5 +1,5 @@
 /**
- * chrome_parameters Extension
+ * browser_handler.parameters Extension
  *
  * background.js
  *
@@ -8,6 +8,17 @@
  */
 
 var tag;
+var nakedtag;
+var browser_handler;
+
+
+/*
+ * This code snippet is needed to detect if we are on browser_handler.or firefox*/
+if(typeof(browser)==='undefined'){
+		browser_handler = chrome;
+} else {
+		browser_handler = browser;
+}
 
 /**
 * Get the url paramater identified by sParam
@@ -26,34 +37,33 @@ function getURLParameter(sParam) {
 	return null;
 }
 
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-	//var url_url = processUrl(tab.url);
+browser_handler.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	console.log("Parameter: " + tab.url);
 	var i = 0;
 	console.log(tab.url.length);
 	var i = tab.url.indexOf('?');
 	var parameter_url = tab.url.substring(i++);
-	chrome.pageAction.show(tabId);
+	browser_handler.pageAction.show(tabId);
 });
 
 function getVersion(){
-    var extension_version = chrome.app.getDetails();
+    var extension_version = browser_handler.app.getDetails();
     return extension_version.version;
 }
 
 function onInstall(){
     console.log("Extension Installed");
-    chrome.tabs.create({'url': chrome.extension.getURL('src/post_install.html')}, function(tab){
+    browser_handler.tabs.create({'url': browser_handler.extension.getURL('src/post_install.html')}, function(tab){
     });
 }
 
 function onUpdate(){
     console.log("Extension Updated");
-    chrome.tabs.create({'url': chrome.extension.getURL('src/post_update.html')}, function(tab){
+    browser_handler.tabs.create({'url': browser_handler.extension.getURL('src/post_update.html')}, function(tab){
     });
 }
 
-chrome.runtime.onInstalled.addListener(function(details){
+browser_handler.runtime.onInstalled.addListener(function(details){
 	var current_version = getVersion();
 	var old_version = localStorage['version']
 	if (current_version != old_version) {
@@ -70,8 +80,19 @@ chrome.runtime.onInstalled.addListener(function(details){
 	console.log("Reason: " + details.reason);
 });
 
+/*
+browser_handler.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        if(details.method == "POST")
+            console.log(JSON.stringify(details));
+    },
+    {urls: ["<all_urls>"]},
+    ["blocking", "requestBody"]
+);*/
+
 function lastError(){
-	if(chrome.runtime.lastError){
-		console.log(chrome.runtime.lastError.message);
+	if(browser_handler.runtime.lastError){
+		console.log(browser_handler.runtime.lastError.message);
 	}
 }
+
