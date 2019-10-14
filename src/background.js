@@ -37,7 +37,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 function getVersion(){
-    var extension_version = chrome.app.getDetails();
+    var extension_version = chrome.runtime.getManifest();
     return extension_version.version;
 }
 
