@@ -270,3 +270,12 @@ function create_csv(parameters_array){
     }
     return csv_file;
 }
+function create_json(parameter_array){
+  var jsonArray = {};
+    for(var key in parameters_array)
+    {
+      jsonArray[key]=parameters_array[key];
+    }
+    var json_file = JSON.stringify(jsonArray);
+    return json_file;
+}
