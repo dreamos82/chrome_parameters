@@ -16,7 +16,7 @@ function click(e) {
 		console.log("Add new parameter");
 		add_new_parameter();
 	} else if(e.target.id=="export"){
-		export_parameters_list("json");
+		export_parameters_list("csv");
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
 			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
