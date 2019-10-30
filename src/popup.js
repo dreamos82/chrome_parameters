@@ -6,7 +6,7 @@
  * @version 1.5
  *
  */
-var exporters = {csv: create_csv};
+var exporters = {csv: create_csv, json: create_json};
 var browser_handler;
 var isChrome;
 /*
@@ -18,7 +18,6 @@ if(typeof(browser)==='undefined'){
 		browser_handler = browser;
 		isChrome = false;
 }
-
 
 function click(e) {
 	console.log(e.target.id);
@@ -291,4 +290,19 @@ function create_csv(parameters_array){
         csv_file += key + "," + "\"" + parameters_array[key]+ "\"\n";
     }
     return csv_file;
+}
+
+/**
+ * Create a json file given a parameters_array.
+ *
+ * @param parameters_array Associative array where key is the parameter name.
+ */
+function create_json(parameter_array){
+  var jsonArray = {};
+    for(var key in parameter_array)
+    {
+      jsonArray[key]=parameter_array[key];
+    }
+    var json_file = JSON.stringify(jsonArray);
+    return json_file;
 }

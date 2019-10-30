@@ -47,7 +47,7 @@ browser_handler.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 function getVersion(){
-    var extension_version = browser_handler.app.getDetails();
+    var extension_version = browser_handler.runtime.getManifest();
     return extension_version.version;
 }
 
