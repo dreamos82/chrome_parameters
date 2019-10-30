@@ -12,11 +12,11 @@ var isChrome;
 /*
  * This code snippet is needed to detect if we are on browser_handler.or firefox*/
 if(typeof(browser)==='undefined'){
-		browser_handler = chrome;
-		isChrome = true;
+	browser_handler = chrome;
+	isChrome = true;
 } else {
-		browser_handler = browser;
-		isChrome = false;
+	browser_handler = browser;
+	isChrome = false;
 }
 
 function click(e) {
@@ -30,10 +30,10 @@ function click(e) {
 		export_parameters_list("csv");
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
-				var externalScript = "src/content_script.js";
-				if(!isChrome){
-						externalScript = "content_script.js"
-				}
+			var externalScript = "src/content_script.js";
+			if(!isChrome){
+				externalScript = "content_script.js"
+			}
 			browser_handler.tabs.executeScript(tab.id, {file: externalScript}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
@@ -244,8 +244,8 @@ function showParameter(parameter, after_hash){
 
 function delete_parameter(){
 	console.log('To call');
-    var container = this.parentNode.parentNode;
-    container.parentNode.removeChild(container);
+ 	var container = this.parentNode.parentNode;
+	container.parentNode.removeChild(container);
 }
 
 /**
@@ -257,24 +257,24 @@ function delete_parameter(){
  */
 function export_parameters_list(format){
 	console.log("Placeholder");
-    var container_div = document.getElementById("container");
-    var parameters = container_div.getElementsByClassName("parameter_value");
-    var parameters_array = new Array();
-    for(i=0; i<parameters.length; i++){
-        console.log(parameters[i].getAttribute("id"));
-        parameters_array[parameters[i].getAttribute("id")] = parameters[i].value;
-    }
-    var result = exporters[format](parameters_array);
-    var link = document.createElement("a");
-    var date = new Date();
-    link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
-    link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
-    if(!isChrome){
-			document.body.appendChild(link);
+	var container_div = document.getElementById("container");
+ 	var parameters = container_div.getElementsByClassName("parameter_value");
+ 	var parameters_array = new Array();
+ 	for(i=0; i<parameters.length; i++){
+        	console.log(parameters[i].getAttribute("id"));
+        	parameters_array[parameters[i].getAttribute("id")] = parameters[i].value;
+	    }
+	var result = exporters[format](parameters_array);
+    	var link = document.createElement("a");
+    	var date = new Date();
+    	link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
+    	link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
+    	if(!isChrome){
+		document.body.appendChild(link);
 	}
-    link.click();
-    if(!isChrome){
-			document.body.removeChild(link);
+	link.click();
+    	if(!isChrome){
+		document.body.removeChild(link);
 	}
 }
 
