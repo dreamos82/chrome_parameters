@@ -6,7 +6,7 @@
  * @version 1.5
  *
  */
-var exporters = {csv: create_csv};
+var exporters = {csv: create_csv, json: create_json};
 
 function click(e) {
 	console.log(e.target.id);
@@ -16,7 +16,28 @@ function click(e) {
 		console.log("Add new parameter");
 		add_new_parameter();
 	} else if(e.target.id=="export"){
-		export_parameters_list("csv");
+		let other_buttons_element = document.getElementById('other_buttons'),
+			new_element = document.createElement('div'),
+			csv_element = document.createElement('div'),
+			json_element = document.createElement('div'),
+			csv_text = document.createTextNode('CSV'),
+			json_text = document.createTextNode('JSON');
+
+		csv_element.appendChild(csv_text);
+		csv_element.addEventListener('click', function() {
+			export_parameters_list("csv");
+		})
+		json_element.appendChild(json_text);
+		json_element.addEventListener('click', function() {
+			export_parameters_list("json");
+		})
+
+		new_element.id = "other_button_options";
+		new_element.appendChild(csv_element);
+		new_element.appendChild(json_element);
+
+		other_buttons_element.parentNode.insertBefore(new_element, other_buttons_element.nextSibling);
+
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
 			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
@@ -253,7 +274,7 @@ function export_parameters_list(format){
     var link = document.createElement("a");
     var date = new Date();
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
-    link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
+    link.href = "data:text/"+format+";charset=utf-8," + encodeURIComponent(result);
     link.click();
 }
 
@@ -269,4 +290,12 @@ function create_csv(parameters_array){
         csv_file += key + "," + "\"" + parameters_array[key]+ "\"\n";
     }
     return csv_file;
+}
+
+function create_json(parameters_array) {
+	let json_file = {};
+	for(let key in parameters_array) {
+		json_file[key] = parameters_array[key];
+	}
+	return JSON.stringify(json_file);
 }
