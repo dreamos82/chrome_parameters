@@ -16,28 +16,7 @@ function click(e) {
 		console.log("Add new parameter");
 		add_new_parameter();
 	} else if(e.target.id=="export"){
-		let other_buttons_element = document.getElementById('other_buttons'),
-			new_element = document.createElement('div'),
-			csv_element = document.createElement('div'),
-			json_element = document.createElement('div'),
-			csv_text = document.createTextNode('CSV'),
-			json_text = document.createTextNode('JSON');
-
-		csv_element.appendChild(csv_text);
-		csv_element.addEventListener('click', function() {
-			export_parameters_list("csv");
-		})
-		json_element.appendChild(json_text);
-		json_element.addEventListener('click', function() {
-			export_parameters_list("json");
-		})
-
-		new_element.id = "other_button_options";
-		new_element.appendChild(csv_element);
-		new_element.appendChild(json_element);
-
-		other_buttons_element.parentNode.insertBefore(new_element, other_buttons_element.nextSibling);
-
+		appendExportOptions();
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
 			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
@@ -298,4 +277,22 @@ function create_json(parameters_array) {
 		json_file[key] = parameters_array[key];
 	}
 	return JSON.stringify(json_file);
+}
+
+function appendExportOptions() {
+	let other_buttons_element = document.getElementById('other_buttons'),
+		new_element = document.createElement('div');
+	
+	new_element.id = "other_button_options";
+	Object.keys(exporters).map((format) => {
+		let format_element = document.createElement('div'),
+			format_text = document.createTextNode(format.toUpperCase());
+
+		format_element.appendChild(format_text);
+		format_element.addEventListener('click', function() {
+			export_parameters_list(format);
+		})
+		new_element.appendChild(format_element);
+	})
+	other_buttons_element.parentNode.insertBefore(new_element, other_buttons_element.nextSibling);
 }
