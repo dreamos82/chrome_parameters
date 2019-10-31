@@ -257,28 +257,6 @@ function export_parameters_list(format){
     link.click();
 }
 
-/**
- * Create a csv string given a parameters_array.
- *
- * @param parameters_array Associative array where key is the parameter name.
- */
-function create_csv(parameters_array){
-    //var csv_file = "data:text/csv;charset=utf-8,";
-    var csv_file = "parameter_name,value\n";
-    for(var key in parameters_array){
-        csv_file += key + "," + "\"" + parameters_array[key]+ "\"\n";
-    }
-    return csv_file;
-}
-
-function create_json(parameters_array) {
-	let json_file = {};
-	for(let key in parameters_array) {
-		json_file[key] = parameters_array[key];
-	}
-	return JSON.stringify(json_file);
-}
-
 function appendExportOptions() {
 	let other_buttons_element = document.getElementById('other_buttons'),
 		new_element = document.createElement('div');
@@ -296,3 +274,33 @@ function appendExportOptions() {
 	})
 	other_buttons_element.parentNode.insertBefore(new_element, other_buttons_element.nextSibling);
 }
+
+/**
+ * Create a csv string given a parameters_array.
+ *
+ * @param parameters_array Associative array where key is the parameter name.
+ */
+function create_csv(parameters_array){
+    //var csv_file = "data:text/csv;charset=utf-8,";
+    var csv_file = "parameter_name,value\n";
+    for(var key in parameters_array){
+        csv_file += key + "," + "\"" + parameters_array[key]+ "\"\n";
+    }
+    return csv_file;
+}
+
+/**
+ * Create a json file given a parameters_array.
+ *
+ * @param parameters_array Associative array where key is the parameter name.
+ */
+function create_json(parameter_array){
+  var jsonArray = {};
+    for(var key in parameter_array)
+    {
+      jsonArray[key]=parameter_array[key];
+    }
+    var json_file = JSON.stringify(jsonArray);
+    return json_file;
+}
+
