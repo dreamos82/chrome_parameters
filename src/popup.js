@@ -7,6 +7,17 @@
  *
  */
 var exporters = {csv: create_csv, json: create_json};
+var browser_handler;
+var isChrome;
+/*
+ * This code snippet is needed to detect if we are on browser_handler.or firefox*/
+if(typeof(browser)==='undefined'){
+	browser_handler = chrome;
+	isChrome = true;
+} else {
+	browser_handler = browser;
+	isChrome = false;
+}
 
 function click(e) {
 	console.log(e.target.id);
@@ -19,7 +30,11 @@ function click(e) {
 		appendExportOptions();
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
-			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
+			var externalScript = "src/content_script.js";
+			if(!isChrome){
+				externalScript = "content_script.js"
+			}
+			browser_handler.tabs.executeScript(tab.id, {file: externalScript}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
 		console.log("Show social bar");
@@ -33,7 +48,7 @@ function update_url(){
 		console.log("Creating new Url");
 		var updated_url = create_updated_url(tab.url);
 		console.log(updated_url);
-		chrome.tabs.update(tab.id, {url: updated_url});
+		browser_handler.tabs.update(tab.id, {url: updated_url});
 		window.close();
 	});
 }
@@ -121,7 +136,7 @@ function create_updated_url(url){
 }
 
 function get_current_tab(callback){
-	chrome.tabs.query({
+	browser_handler.tabs.query({
 		active: true,               // Select active tabs
 		lastFocusedWindow: true     // In the current window
 	}, function(array_of_Tabs) {
@@ -229,8 +244,8 @@ function showParameter(parameter, after_hash){
 
 function delete_parameter(){
 	console.log('To call');
-    var container = this.parentNode.parentNode;
-    container.parentNode.removeChild(container);
+ 	var container = this.parentNode.parentNode;
+	container.parentNode.removeChild(container);
 }
 
 /**
@@ -241,7 +256,6 @@ function delete_parameter(){
  * @param format - The selected export format
  */
 function export_parameters_list(format){
-	console.log("Placeholder");
     var container_div = document.getElementById("container");
     var parameters = container_div.getElementsByClassName("parameter_value");
     var parameters_array = new Array();
@@ -253,8 +267,14 @@ function export_parameters_list(format){
     var link = document.createElement("a");
     var date = new Date();
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
-    link.href = "data:text/"+format+";charset=utf-8," + encodeURIComponent(result);
+    link.href = "data:text/"+format+";charset=utf-8," + encodeURIComponent(result);	
+    if(!isChrome){
+		document.body.appendChild(link);
+	}
     link.click();
+    if(!isChrome){
+		document.body.removeChild(link);
+	}
 }
 
 function appendExportOptions() {
