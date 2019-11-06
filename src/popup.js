@@ -265,6 +265,7 @@ function appendExportOptions() {
 	Object.keys(exporters).map((format) => {
 		let format_element = document.createElement('div'),
 			format_text = document.createTextNode(format.toUpperCase());
+			format_element.id = format + "_link";
 
 		format_element.appendChild(format_text);
 		format_element.addEventListener('click', function() {
