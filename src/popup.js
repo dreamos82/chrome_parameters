@@ -16,7 +16,7 @@ function click(e) {
 		console.log("Add new parameter");
 		add_new_parameter();
 	} else if(e.target.id=="export"){
-		export_parameters_list("csv");
+		appendExportOptions();
 	} else if(e.target.id=="import"){
 		get_current_tab(function(tab){
 			chrome.tabs.executeScript(tab.id, {file: "src/content_script.js"}, function(element){});
@@ -253,8 +253,26 @@ function export_parameters_list(format){
     var link = document.createElement("a");
     var date = new Date();
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
-    link.href = "data:text/csv;charset=utf-8," + encodeURIComponent(result);
+    link.href = "data:text/"+format+";charset=utf-8," + encodeURIComponent(result);
     link.click();
+}
+
+function appendExportOptions() {
+	let other_buttons_element = document.getElementById('other_buttons'),
+		new_element = document.createElement('div');
+	
+	new_element.id = "other_button_options";
+	Object.keys(exporters).map((format) => {
+		let format_element = document.createElement('div'),
+			format_text = document.createTextNode(format.toUpperCase());
+
+		format_element.appendChild(format_text);
+		format_element.addEventListener('click', function() {
+			export_parameters_list(format);
+		})
+		new_element.appendChild(format_element);
+	})
+	other_buttons_element.parentNode.insertBefore(new_element, other_buttons_element.nextSibling);
 }
 
 /**
@@ -285,3 +303,4 @@ function create_json(parameter_array){
     var json_file = JSON.stringify(jsonArray);
     return json_file;
 }
+
