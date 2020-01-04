@@ -10,7 +10,6 @@
 var fileChooser = document.createElement("input");
 fileChooser.type = 'file';
 fileChooser.addEventListener('change', function (evt) {
-    console.log('inside content script change event');
     var f= evt.target.files[0];
     if(f){
         var reader = new FileReader();
@@ -32,7 +31,6 @@ fileChooser.addEventListener('change', function (evt) {
                     url_array += parameter;
                 }
             }
-            console.log(url_array);
             url_array = url_array.replace(/"/g, '');
             document.location.href= url_array;
         }
