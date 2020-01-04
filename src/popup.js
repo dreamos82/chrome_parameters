@@ -20,11 +20,9 @@ if(typeof(browser)==='undefined'){
 }
 
 function click(e) {
-	console.log(e.target.id);
 	if(e.target.id=="update"){
 		update_url();
 	} else if(e.target.id=="addnew") {
-		console.log("Add new parameter");
 		add_new_parameter();
 	} else if(e.target.id=="export"){
 		appendExportOptions();
@@ -37,7 +35,6 @@ function click(e) {
 			browser_handler.tabs.executeScript(tab.id, {file: externalScript}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
-		console.log("Show social bar");
 		var element = document.getElementById("social_bar")
 		element.style.display = "block";
 	}
@@ -45,7 +42,6 @@ function click(e) {
 
 function update_url(){
 	get_current_tab(function(tab){
-		console.log("Creating new Url");
 		var updated_url = create_updated_url(tab.url);
 		console.log(updated_url);
 		browser_handler.tabs.update(tab.id, {url: updated_url});
@@ -63,7 +59,6 @@ function add_new_parameter(){
 	parameter_name_container.setAttribute("type", "text");
 	parameter_value_container.addEventListener("keypress", input_keypress);
 	parameter_name_container.onblur = function(){
-	console.log(this);
   	if(this.value!=""){
 		var element = this.parentElement.parentElement.childNodes[1].childNodes[0];
 		element.setAttribute("id", this.value);
@@ -102,7 +97,6 @@ function add_hash() {
 
 function create_updated_url(url){
 	var container_div = document.getElementById("container");
-	console.log(container_div);
 	//var parameters = container_div.getElementsByTagName("input");
 	var parameters = container_div.getElementsByTagName("tr");
 	var url_split = url.split("?");
@@ -148,15 +142,12 @@ function parse_url(current_url){
 	var par_start = current_url.indexOf('?');
 	var hash_position = current_url.lastIndexOf('#');
 	if(par_start>0 && par_start!= current_url.length-1){
-	console.log("parameters found!!");
 	if (hash_position>par_start) {
 		parameter_url = current_url.substring(++par_start, hash_position);
 	} else {
 		parameter_url = current_url.substring(++par_start);
 	}
-	console.log(parameter_url);
 	var result = parameter_url.split("&");
-	console.log(parameter_url.length);
 	document.getElementById("container").innerHTML = "";
 
 	for(var i=0;i<result.length && result.length>0; i++){
@@ -164,8 +155,6 @@ function parse_url(current_url){
 	}
 	if(hash_position>par_start){
 		/*Improve this piece of code*/
-		console.log("A: " + current_url.substring(current_url.indexOf("#")));
-		console.log("B: " + current_url.substring(current_url.indexOf("?"), hash_position));
 		var sub_result = current_url.substring(++hash_position);
 		var sub_array = sub_result.split("&");
 		add_hash();
@@ -174,7 +163,6 @@ function parse_url(current_url){
 			console.log(sub_array[k]);
 			showParameter(sub_array[k]);
 			}
-		console.log("End");
 		}
 	}
 }
@@ -182,7 +170,6 @@ function parse_url(current_url){
 document.addEventListener('DOMContentLoaded', function () {
 	var divs = document.querySelectorAll('div');
 	for (var i = 0; i < divs.length; i++) {
-		console.log("added");
 		if(divs[i]!="other_buttons"){
 			divs[i].addEventListener('click', click);
 		}
@@ -196,7 +183,6 @@ function input_keypress(event){
 	if (event.keyCode == 13) {
 		update_url();
 	}
-	console.log(event.keyCode);
 }
 
 /**

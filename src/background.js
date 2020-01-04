@@ -40,7 +40,6 @@ function getURLParameter(sParam) {
 browser_handler.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	console.log("Parameter: " + tab.url);
 	var i = 0;
-	console.log(tab.url.length);
 	var i = tab.url.indexOf('?');
 	var parameter_url = tab.url.substring(i++);
 	browser_handler.pageAction.show(tabId);
@@ -67,9 +66,7 @@ browser_handler.runtime.onInstalled.addListener(function(details){
 	var current_version = getVersion();
 	var old_version = localStorage['version']
 	if (current_version != old_version) {
-		console.log(old_version);
 		if (old_version == undefined) {
-			console.log("OnInstall Call");
 			localStorage['version'] = current_version;
 			onInstall();
 		} else {
@@ -77,7 +74,6 @@ browser_handler.runtime.onInstalled.addListener(function(details){
 			onUpdate();
 		}
 	}
-	console.log("Reason: " + details.reason);
 });
 
 /*
