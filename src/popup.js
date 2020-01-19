@@ -100,16 +100,22 @@ function create_updated_url(url){
 	//var parameters = container_div.getElementsByTagName("input");
 	var parameters = container_div.getElementsByTagName("tr");
 	var url_split = url.split("?");
+	hash_found = false;
 	if(url_split!=null){
-		var new_url = url_split[0] + "?";
+		var new_url = url_split[0].replace(/#$/, "") + "?";
 	}
-
 	for(i=0; i<parameters.length; i++){
 		var row_parameters = parameters[i].getElementsByTagName("input");
 		var parameter_name = row_parameters[0].value
 		var parameter_value = row_parameters[1].value
-		if (parameter_name == "hash") {
-			new_url = new_url+"#";
+		console.log(parameter_name);
+		if (parameter_name == "hash" || parameter_name == "#") {
+			hash_found = true;
+			if( new_url.endsWith("&") || new_url.endsWith("?") ) {
+				new_url = new_url.replace(/[&?]$/, "#");
+			} else {
+				new_url = new_url+"#";
+			}
 			continue;
 		} else if(parameter_name == "new_parameter" || parameter_name == undefined ) {
 			continue;
