@@ -76,15 +76,6 @@ browser_handler.runtime.onInstalled.addListener(function(details){
 	}
 });
 
-/*
-browser_handler.webRequest.onBeforeRequest.addListener(
-    function(details) {
-        if(details.method == "POST")
-            console.log(JSON.stringify(details));
-    },
-    {urls: ["<all_urls>"]},
-    ["blocking", "requestBody"]
-);*/
 
 function lastError(){
 	if(browser_handler.runtime.lastError){
