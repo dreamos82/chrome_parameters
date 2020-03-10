@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Parameters Editor",
-  "version": "1.5.2",
+  "version": "1.6",
 
   "description": "Shows parameters used in the URL and allows to update, export and import them ",
 
@@ -26,5 +26,9 @@
     "gecko": {
       "id": "parameters_editor@ivan.gualandri.gmail.com"
 	}
+  },
+
+  "icons": {
+      "128": "icon128.png"
   }
 }
