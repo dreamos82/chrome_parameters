@@ -3,6 +3,10 @@ Chrome Parameters
 
 A chrome extension that shows parameters from the URL
 
+** Important update ** 
+So tried to upload version 1.6, but unfortunately it keeps being rejected by the store, because i'm using too broad permissions. 
+Tried to explain what the problem was (that the purpose of the extension is to parse url data, so this is why it need access to all sites) but looks like who is doing the reviews only reply with template answers and doesn't help me in identifying answers (i already sent them more than 6 or 7 emails, and not sure if i will do it again, so for now chrome version will be available only on github until further notice. For the firefox version instead i need to make a suitable logo before submitting it to the firefox addon store!
+
 Install from [Google Chrome Web Store](https://chrome.google.com/webstore/detail/parameters-viewer/jcfdalmioobeifbpcgjghhaifimaeaca) 
 
 How to contribute
