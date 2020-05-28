@@ -21,6 +21,12 @@
     "default_popup": "src/popup.html"
   },
 
+  "applications": {
+    "gecko": {
+      "id": "parameters_editor@ivan.gualandri.gmail.com"
+	}
+  },
+
   "icons": {
       "128": "images/icon128.png"
   }
