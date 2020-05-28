@@ -1,9 +1,11 @@
-Chrome Parameters
+Browser Parameters
 =================
 
-A chrome extension that shows parameters from the URL
+A chrome/firefox extension that shows parameters from the URL
 
 Install from [Google Chrome Web Store](https://chrome.google.com/webstore/detail/parameters-viewer/jcfdalmioobeifbpcgjghhaifimaeaca) 
+
+Install from [Firefox Addon Market](https://addons.mozilla.org/en-US/firefox/addon/url-parameters-editor/)
 
 How to contribute
 -----------------
