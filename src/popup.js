@@ -320,7 +320,6 @@ function create_xml(parameter_array){
     console.log("TBD");
     var xmlText = "<parameters>\n"
     for(var key in parameter_array){
-        console.log("\t<parameter>\n\t\t<key>" + key + "</key>\n\t\t<value>" + parameter_array[key] + "</value>\n\t</parameter>\n");
         xmlText += "\t<parameter>\n\t\t<key>" + key + "</key>\n\t\t<value>" + parameter_array[key] + "</value>\n\t</parameter>\n";
     }
     xmlText +="</parameters>";
