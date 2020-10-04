@@ -6,7 +6,7 @@
  * @version 1.5
  *
  */
-var exporters = {csv: create_csv, json: create_json};
+var exporters = {csv: create_csv, json: create_json, xml: create_xml};
 var browser_handler;
 var isChrome;
 /*
@@ -310,4 +310,20 @@ function create_json(parameter_array){
     var json_file = JSON.stringify(jsonArray);
     return json_file;
 }
+
+/**
+ * Create a xml file given a parameters_array.
+ *
+ * @param parameters_array Associative array where key is the parameter name.
+ */
+function create_xml(parameter_array){
+    console.log("TBD");
+    var xmlText = "<parameters>\n"
+    for(var key in parameter_array){
+        xmlText += "\t<parameter>\n\t\t<key>" + key + "</key>\n\t\t<value>" + parameter_array[key] + "</value>\n\t</parameter>\n";
+    }
+    xmlText +="</parameters>";
+    return xmlText;
+}
+
 
