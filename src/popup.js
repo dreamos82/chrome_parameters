@@ -37,7 +37,10 @@ function click(e) {
 	} else if(e.target.id=="social_button"){
 		var element = document.getElementById("social_bar")
 		element.style.display = "block";
-	}
+	} else if(e.target.id=="help_link"){
+        browser_handler.tabs.create({'url': browser_handler.extension.getURL('src/help.html')}, function(tab){
+        });
+    }
 }
 
 function update_url(){
@@ -174,6 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			divs[i].addEventListener('click', click);
 		}
 	}
+    var help_link = document.getElementById("help_link");
+    help_link.addEventListener('click', click);
 	get_current_tab(function(tab){
 		parse_url(tab.url);
 	});
