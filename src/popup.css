@@ -1,22 +1,21 @@
 
 @media (prefers-color-scheme: dark) {
-    body {
-        min-width: 377px;
-        overflow-x: hidden;
-        background-color: #24241f;
+    :root {
+        --bg-color: #24241f;
     }
-
 }
 
 @media (prefers-color-scheme: light) {
-    body {
-        min-width: 377px;
-        overflow-x: hidden;
-        background-color: white;
+    :root {
+        --bg-color: #ffffff;
     }
-
 }
 
+body {
+    min-width: 377px;
+    overflow-x: hidden;
+    background-color: var(--bg-color);
+}
 
 input {
     border: 2px solid #C1C4BE;
