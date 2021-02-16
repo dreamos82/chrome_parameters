@@ -1,6 +1,20 @@
-body {
-    min-width: 377px;
-    overflow-x: hidden;
+
+@media (prefers-color-scheme: dark) {
+    body {
+        min-width: 377px;
+        overflow-x: hidden;
+        background-color: #24241f;
+    }
+
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        min-width: 377px;
+        overflow-x: hidden;
+        background-color: white;
+    }
+
 }
 
 
