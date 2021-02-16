@@ -2,12 +2,14 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #24241f;
+        --hr-color: #ffffff
     }
 }
 
 @media (prefers-color-scheme: light) {
     :root {
         --bg-color: #ffffff;
+        --hr-color: #000000;
     }
 }
 
@@ -21,6 +23,10 @@ input {
     border: 2px solid #C1C4BE;
     border-radius: 5px;
     padding-left: 5px
+}
+
+.themed {
+    background-color: var(--hr-color);
 }
 
 .parameter_name {
