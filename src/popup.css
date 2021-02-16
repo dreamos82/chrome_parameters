@@ -1,0 +1,50 @@
+body {
+    min-width: 377px;
+    overflow-x: hidden;
+}
+
+
+input {
+    border: 2px solid #C1C4BE;
+    border-radius: 5px;
+    padding-left: 5px
+}
+
+.parameter_name {
+    width: 200px;
+    background-color: #ebebe4;
+}
+
+.parameter_value {
+    width: 250px;
+}
+
+div#report_bug {
+    text-align: right;
+}
+div#social_bar {
+    display: none;
+}
+
+#other_button_options {
+  color: #006699;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: smaller;
+  cursor: pointer;
+}
+
+#csv_link {
+  float: left;
+  width:50%;
+}
+
+   #json_link {
+  float: left;
+  width: 50%;
+}
+
+   .external_link a:link { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
+   .external_link a:visited { color: #006699; font-weight: bold; text-decoration: none; font-size: smaller}
+
+
