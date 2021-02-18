@@ -7,17 +7,17 @@
  *
  */
 var exporters = {csv: create_csv, json: create_json, xml: create_xml};
-var browser_handler;
-var isChrome;
-/*
- * This code snippet is needed to detect if we are on browser_handler.or firefox*/
-if(typeof(browser)==='undefined'){
-	browser_handler = chrome;
-	isChrome = true;
-} else {
-	browser_handler = browser;
-	isChrome = false;
-}
+var browser_handler = getBrowserHandler();
+var isChrome = isChromeBrowser();
+var dark_colors_values = {
+        '--bg-color': '#24241f',
+        '--hr-color': '#ffffff'
+};
+var light_colors_values = { 
+    '--bg-color': '#ffffff', 
+    '--hr-color': '#000000'
+};
+
 
 function click(e) {
 	if(e.target.id=="update"){
@@ -181,6 +181,18 @@ document.addEventListener('DOMContentLoaded', function () {
 	get_current_tab(function(tab){
 		parse_url(tab.url);
 	});
+    browser_handler.storage.sync.get('selected_theme', function(result){
+        console.log('selected theme: ' + result.selected_theme);
+        isDark = window.matchMedia('(prefers-color-scheme : dark)').matches;
+        if(result.selected_theme && result.selected_theme != 'system'){
+            var root = document.documentElement;
+            if (isDark && result.selected_theme == 'light'){
+                applyTheme(result, light_color_values, root);
+            } else if (!isDark && result.selected_theme == 'dark'){
+                applyTheme(result, dark_colors_values, root);
+            }
+        }
+    });
 });
 
 function input_keypress(event){
