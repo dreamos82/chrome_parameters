@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("selected_theme: " + result.selected_theme);
             var root = document.documentElement;
             if (isDark && result.selected_theme == 'light'){
-                applyTheme(result, light_color_values, root);
+                applyTheme(result, light_colors_values, root);
             } else if (!isDark && result.selected_theme == 'dark'){
                 applyTheme(result, dark_colors_values, root);
             }
