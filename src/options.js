@@ -37,7 +37,7 @@ function click(e){
         console.log("Value seleted: " + color_theme);
         chrome.storage.sync.set({'selected_theme': color_theme}, function(){
             console.log('Saved');
-            document.getElementById('status').textContent = 'Saved';
+            document.getElementById('status').textContent = 'Saved - Close and reopen the extension make any change effective';
         });
     }
 }
