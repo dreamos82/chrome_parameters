@@ -2,7 +2,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #24241f;
-        --hr-color: #ffffff
+        --hr-color: #ffffff;
     }
 }
 
@@ -58,7 +58,7 @@ div#social_bar {
   width:50%;
 }
 
-   #json_link {
+#json_link {
   float: left;
   width: 50%;
 }

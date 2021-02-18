@@ -37,7 +37,9 @@ function click(e) {
 	} else if(e.target.id=="social_button"){
 		var element = document.getElementById("social_bar")
 		element.style.display = "block";
-	}
+	} else if(e.target.id=="options_button"){
+        browser_handler.runtime.openOptionsPage();
+    }
 }
 
 function update_url(){
@@ -174,6 +176,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			divs[i].addEventListener('click', click);
 		}
 	}
+    var options_link = document.getElementById("options_button");
+    options_link.addEventListener('click', click);
 	get_current_tab(function(tab){
 		parse_url(tab.url);
 	});
@@ -317,7 +321,6 @@ function create_json(parameter_array){
  * @param parameters_array Associative array where key is the parameter name.
  */
 function create_xml(parameter_array){
-    console.log("TBD");
     var xmlText = "<parameters>\n"
     for(var key in parameter_array){
         xmlText += "\t<parameter>\n\t\t<key>" + key + "</key>\n\t\t<value>" + parameter_array[key] + "</value>\n\t</parameter>\n";
