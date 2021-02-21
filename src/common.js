@@ -1,5 +1,3 @@
-var storedTheme;
-var themeChanged = false;
 function getBrowserHandler(){
     var browser_handler;
     if(typeof(browser)==='undefined'){
@@ -18,10 +16,8 @@ function isChromeBrowser(){
 }
 
 function applyTheme(selected_theme, color_values, root){
-    console.log("Called");
     for (var key in color_values){
         console.log(color_values[key]);
         root.style.setProperty(key, color_values[key]);
     }
-
 }
