@@ -3,30 +3,25 @@
   <head>
     <title>Parameters viewer</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
+    <script src="common.js"></script>
     <script src="popup.js"></script>
-
-
   </head>
   <body>
 	  <div><img id="parse_button" src="../images/parameters.png"/></div>
 	  <table id="container"></table>
-	  <hr />
+	  <hr style="themed" />
 	  <div id="other_buttons">
 	    <img id="update" src="../images/update.png"/>
 	    <img id="addnew" src="../images/add.png"/>
-      <img id="export" src="../images/export.png"/>
+        <img id="export" src="../images/export.png"/>
 	    <img id="import" src="../images/import.png"/>
 	    <input id="myInput" type="file" style="display:none" />
 	  </div>
       <div>
         <div id="report_bug" class="external_link">
           <a href="https://github.com/dreamos82/chrome_parameters/issues/new" class="external_link" target="_blank" rel="noopener">Create a bug/suggestion</a>
+          <br />
+          <a id="options_button" href="#">Options</a>
        </div>
         <div id="social_link" class="external_link">
           <a id="social_button" href="#">Like it...</a>

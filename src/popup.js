@@ -7,17 +7,17 @@
  *
  */
 var exporters = {csv: create_csv, json: create_json, xml: create_xml};
-var browser_handler;
-var isChrome;
-/*
- * This code snippet is needed to detect if we are on browser_handler.or firefox*/
-if(typeof(browser)==='undefined'){
-	browser_handler = chrome;
-	isChrome = true;
-} else {
-	browser_handler = browser;
-	isChrome = false;
-}
+var browser_handler = getBrowserHandler();
+var isChrome = isChromeBrowser();
+var dark_colors_values = {
+        '--bg-color': '#24241f',
+        '--hr-color': '#ffffff'
+};
+var light_colors_values = { 
+    '--bg-color': '#ffffff', 
+    '--hr-color': '#000000'
+};
+
 
 function click(e) {
 	if(e.target.id=="update"){
@@ -37,7 +37,9 @@ function click(e) {
 	} else if(e.target.id=="social_button"){
 		var element = document.getElementById("social_bar")
 		element.style.display = "block";
-	}
+	} else if(e.target.id=="options_button"){
+        browser_handler.runtime.openOptionsPage();
+    }
 }
 
 function update_url(){
@@ -174,9 +176,23 @@ document.addEventListener('DOMContentLoaded', function () {
 			divs[i].addEventListener('click', click);
 		}
 	}
+    var options_link = document.getElementById("options_button");
+    options_link.addEventListener('click', click);
 	get_current_tab(function(tab){
 		parse_url(tab.url);
 	});
+    browser_handler.storage.sync.get('selected_theme', function(result){
+        console.log('selected theme: ' + result.selected_theme);
+        isDark = window.matchMedia('(prefers-color-scheme : dark)').matches;
+        if(result.selected_theme && result.selected_theme != 'system'){
+            var root = document.documentElement;
+            if (isDark && result.selected_theme == 'light'){
+                applyTheme(result, light_colors_values, root);
+            } else if (!isDark && result.selected_theme == 'dark'){
+                applyTheme(result, dark_colors_values, root);
+            }
+        }
+    });
 });
 
 function input_keypress(event){
@@ -317,7 +333,6 @@ function create_json(parameter_array){
  * @param parameters_array Associative array where key is the parameter name.
  */
 function create_xml(parameter_array){
-    console.log("TBD");
     var xmlText = "<parameters>\n"
     for(var key in parameter_array){
         xmlText += "\t<parameter>\n\t\t<key>" + key + "</key>\n\t\t<value>" + parameter_array[key] + "</value>\n\t</parameter>\n";
