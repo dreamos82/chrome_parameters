@@ -280,22 +280,27 @@ function export_parameters_list(format){
 }
 
 function appendExportOptions() {
-	let other_buttons_element = document.getElementById('other_buttons'),
+    var new_element = document.getElementById("other_button_options");
+    if(new_element){
+        new_element.remove();
+    } else {
 		new_element = document.createElement('div');
-	
-	new_element.id = "other_button_options";
-	Object.keys(exporters).map((format) => {
-		let format_element = document.createElement('div'),
-			format_text = document.createTextNode(format.toUpperCase());
-			format_element.id = format + "_link";
+        let other_buttons_element = document.getElementById('other_buttons');	
+    	new_element.id = "other_button_options";
+    	Object.keys(exporters).map((format) => {
+    		let format_element = document.createElement('div'),
+    			format_text = document.createTextNode(format.toUpperCase());
+       			format_element.id = format + "_link";
 
-		format_element.appendChild(format_text);
-		format_element.addEventListener('click', function() {
-			export_parameters_list(format);
-		})
-		new_element.appendChild(format_element);
-	})
-	other_buttons_element.parentNode.insertBefore(new_element, other_buttons_element.nextSibling);
+	    	format_element.appendChild(format_text);
+    		format_element.addEventListener('click', function() {
+    			export_parameters_list(format);
+	    	})
+		    new_element.appendChild(format_element);
+    	})
+	    other_buttons_element.parentNode.insertBefore(new_element, other_buttons_element.nextSibling);
+    }
+
 }
 
 /**
