@@ -1,5 +1,6 @@
 Browser Parameters
 =================
+[![Discord](https://img.shields.io/discord/578193015433330698)](https://discord.com/channels/578193015433330698/578193341594730516)
 
 A chrome/firefox extension that shows parameters from the URL
 
