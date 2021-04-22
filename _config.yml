@@ -1,0 +1,8 @@
+title: Chrome parameters
+description: A chrome extension that show parameters in a URL
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
