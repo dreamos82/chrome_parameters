@@ -5,8 +5,9 @@ You can freely install it from [Google Chrome Web Store](https://chrome.google.c
 
 ### Instructions
 
-You can freely install it from for chrome [Google Chrome Web Store](https://chrome.google.com/webstore/detail/parameters-viewer/jcfdalmioobeifbpcgjghhaifimaeaca)
-You can freely install it from for firefox [Firefox AddOn Store](https://addons.mozilla.org/en-US/firefox/addon/url-parameters-editor/)
+* You can freely install it from for chrome [Google Chrome Web Store](https://chrome.google.com/webstore/detail/parameters-viewer/jcfdalmioobeifbpcgjghhaifimaeaca)
+* You can freely install it from for firefox [Firefox AddOn Store](https://addons.mozilla.org/en-US/firefox/addon/url-parameters-editor/)
+
 Once installed, just click on EDIT icon you see in the address bar, and you'll see all parameters used to get to that page.
 You can edit values for those parameters simply typing new value in the text box at the right of parameter key, or you can add a new parameter by pressing the Add new button
 When you've finished editing parameters, just click on Update Parameters and you'll get to another page with updated parameters. By clicking on the export button you can also export the parameter list on json (from ver 1.6) or csv. And you can also import parameters from csv. 
