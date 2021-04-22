@@ -13,7 +13,7 @@ You can edit values for those parameters simply typing new value in the text box
 When you've finished editing parameters, just click on Update Parameters and you'll get to another page with updated parameters. By clicking on the export button you can also export the parameter list on json (from ver 1.6) or csv. And you can also import parameters from csv. 
 
 ### Authors and Contributors
-[Ivan @dreamos82](https://github.com/dreamos82)
+[**Ivan Gualandri** *@dreamos82*](https://github.com/dreamos82)
 
 Contributors to the project
 
