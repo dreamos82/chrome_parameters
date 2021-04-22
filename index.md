@@ -3,7 +3,7 @@ The scope of this extension is to show parameters used to get to the page you're
 
 You can freely install it from [Google Chrome Web Store](https://chrome.google.com/webstore/detail/parameters-viewer/jcfdalmioobeifbpcgjghhaifimaeaca).
 
-###Instructions
+### Instructions
 
 You can freely install it from for chrome [Google Chrome Web Store](https://chrome.google.com/webstore/detail/parameters-viewer/jcfdalmioobeifbpcgjghhaifimaeaca)
 You can freely install it from for firefox [Firefox AddOn Store](https://addons.mozilla.org/en-US/firefox/addon/url-parameters-editor/)
