@@ -8,5 +8,5 @@ gems:
   - jekyll-mentions
 
 github:
-  zip_url: https://github.com/dreamos82/chrome_parameters/archive/refs/tags/1.6.1.zip
-  tar_url: https://github.com/dreamos82/chrome_parameters/archive/refs/tags/1.6.1.tar.gz
+  zip_url: https://github.com/dreamos82/chrome_parameters/zipball/master
+  tar_url: https://github.com/dreamos82/chrome_parameters/zipball/master
