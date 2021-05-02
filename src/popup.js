@@ -39,6 +39,9 @@ function click(e) {
 		element.style.display = "block";
 	} else if(e.target.id=="options_button"){
         browser_handler.runtime.openOptionsPage();
+    } else if(e.target.id=="help_link") {
+        browser_handler.tabs.create({'url': browser_handler.extension.getURL('src/help.html')}, function(tab){
+        });
     }
 }
 
