@@ -73,8 +73,20 @@ function add_new_parameter(){
 	add_new_row(parameter_name_container, parameter_value_container);
 }
 
+function drag_it(){
+    console.log("Dragstart");
+}
+
+function drag_over(e){
+    e.preventDefault();
+    console.log("Dragover");
+}
+
 function add_new_row() {
 	var tr_element = document.createElement("tr");
+    tr_element.draggable=true;
+    tr_element.addEventListener("dragstart", drag_it);
+    tr_element.addEventListener("dragover", drag_over);
 	for(var i in arguments) {
 		var td = document.createElement("td");
 		td.appendChild(arguments[i]);
