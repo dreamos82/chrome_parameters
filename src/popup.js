@@ -73,13 +73,15 @@ function add_new_parameter(){
 	add_new_row(parameter_name_container, parameter_value_container);
 }
 
-function drag_it(){
+function drag_it(e){
     console.log("Dragstart");
+    var current_target_tr = e.currentTarget;
 }
 
 function drag_over(e){
     e.preventDefault();
     console.log("Dragover");
+    console.log(e);
 }
 
 function add_new_row() {
