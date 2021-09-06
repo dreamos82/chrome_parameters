@@ -33,3 +33,5 @@ Having trouble with Chrome Parameters Viewer?
 Check out the documentation at [wiki](https://github.com/c103/chrome_parameters/wiki) or open an issue at [issues](https://github.com/dreamos82/chrome_parameters/issues/) and we’ll help you sort it out.
 
 If you like this extension and want to give your little contribute consider becoming a patron! :) [**Become a Patron!**](https://www.patreon.com/bePatron?u=26413433)
+
+Just want to get in touch? You can join our [**Discord server**](https://discord.com/channels/578193015433330698/578193341594730516)
