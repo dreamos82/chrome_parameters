@@ -9,6 +9,7 @@
 var exporters = {csv: create_csv, json: create_json, xml: create_xml};
 var browser_handler = getBrowserHandler();
 var isChrome = isChromeBrowser();
+var dragSourceElement = null;
 var dark_colors_values = {
         '--bg-color': '#24241f',
         '--hr-color': '#ffffff'
@@ -73,8 +74,36 @@ function add_new_parameter(){
 	add_new_row(parameter_name_container, parameter_value_container);
 }
 
+function drag_it(e){
+    var current_target_tr = e.currentTarget;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    dragSourceElement = this;
+}
+
+function drag_over(e){
+    e.preventDefault();
+}
+
+function drop_it(e){
+    e.stopPropagation();
+    console.log(e);
+    if(dragSourceElement !== this){
+        console.log(dragSourceElement.innerHTML);
+        console.log(this.innerHTML);
+        var targetRowHTML = this.innerHTML;
+        this.innerHTML = dragSourceElement.innerHTML;
+        dragSourceElement.innerHTML = targetRowHTML;
+    }
+    return false;
+}
+
 function add_new_row() {
 	var tr_element = document.createElement("tr");
+    tr_element.draggable=true;
+    tr_element.addEventListener("dragstart", drag_it);
+    tr_element.addEventListener("dragover", drag_over);
+    tr_element.addEventListener("drop", drop_it);
 	for(var i in arguments) {
 		var td = document.createElement("td");
 		td.appendChild(arguments[i]);
@@ -227,10 +256,12 @@ function showParameter(parameter, after_hash){
 		console.log("No parameter");
 		return;
 	}
+    console.log(parameter_array.length);
+    console.log(parameter_array[1]);
 	var text_input_element = document.createElement("input");
 	text_input_element.type = "text";
 	if(parameter_array[1] !== undefined) {
-		text_input_element.value = unescape(parameter_array[1]);
+        text_input_element.setAttribute("value", unescape(parameter_array[1]));
 	}
 
 	text_input_element.setAttribute("id", parameter_array[0]);
