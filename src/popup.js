@@ -75,7 +75,6 @@ function add_new_parameter(){
 }
 
 function drag_it(e){
-    console.log("Dragstart");
     var current_target_tr = e.currentTarget;
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', this.innerHTML);
@@ -84,14 +83,10 @@ function drag_it(e){
 
 function drag_over(e){
     e.preventDefault();
-    console.log(this.innerHTML)
-/*    console.log("Dragover");
-    console.log(e);*/
 }
 
 function drop_it(e){
     e.stopPropagation();
-    console.log("Drop");
     console.log(e);
     if(dragSourceElement !== this){
         console.log(dragSourceElement.innerHTML);
