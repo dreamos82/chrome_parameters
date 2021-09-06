@@ -24,7 +24,7 @@ If you like my work (this extension or my other projects) you can also contribut
 
 License
 -----------------
-Copyright (C) 2014-2020 Ivan Gualandri
+Copyright (C) 2014-2021 Ivan Gualandri
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
