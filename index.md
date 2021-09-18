@@ -24,6 +24,7 @@ Contributors to the project
 * [**Olly Nural** - Contributor](https://github.com/OllyNuralAND)
 * [**Jatin Arora** - Contributor](https://github.com/jatinAroraGit")
 * [**Daniel Azvedo** - Contributor (Graphic content)](https://github.com/3rdvision)
+* [**Kushal Singh - Contributor**](https://github.com/kushalsng)
 
 ### Special Thanks
 [**Amit Kohli**](https://github.com/DataStrategist)
