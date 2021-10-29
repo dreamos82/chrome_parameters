@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Parameters Editor",
-  "version": "1.7",
+  "version": "1.8-dev",
 
   "description": "Shows parameters used in the URL and allows to update, export and import them ",
 
