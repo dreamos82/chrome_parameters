@@ -275,7 +275,11 @@ function showParameter(parameter, after_hash){
 	img_element.addEventListener('click', delete_parameter, false);
 	img_element.setAttribute("id", parameter_array[0]);
 	img_element.src = '../images/delete.png';
-	add_new_row(b_element, text_input_element, img_element);
+    var checkbox_element = document.createElement("input");
+    checkbox_element.type = "checkbox";
+    checkbox_element.id=parameter_array[0] + "_chk";
+    checkbox_element.value=parameter_array[0]; 
+	add_new_row(b_element, text_input_element, img_element, checkbox_element);
 }
 
 function delete_parameter(){
