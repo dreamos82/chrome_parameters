@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Parameters Editor",
-  "version": "1.8-dev",
+  "version": "1.7",
 
   "description": "Shows parameters used in the URL and allows to update, export and import them ",
 
@@ -29,6 +29,6 @@
   },
 
   "icons": {
-      "128": "images/icon128.png"
+      "127": "images/icon128.png"
   }
 }
