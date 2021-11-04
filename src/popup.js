@@ -3,7 +3,7 @@
  *
  * popup.js
  *
- * @version 1.5
+ * @version 1.8
  *
  */
 var exporters = {csv: create_csv, json: create_json, xml: create_xml};
@@ -174,28 +174,34 @@ function get_current_tab(callback){
 
 function parse_url(current_url){
 	var par_start = current_url.indexOf('?');
+    var title_div = document.getElementById("title_div");
+    if( title_div != undefined){
+        var url_hostname = getHostName(current_url);
+        var text_node = document.createTextNode(" for " + url_hostname);
+        title_div.appendChild(text_node);
+    }
+
 	var hash_position = current_url.lastIndexOf('#');
 	if(par_start>0 && par_start!= current_url.length-1){
-	if (hash_position>par_start) {
-		parameter_url = current_url.substring(++par_start, hash_position);
-	} else {
-		parameter_url = current_url.substring(++par_start);
-	}
-	var result = parameter_url.split("&");
-	document.getElementById("container").innerHTML = "";
-
-	for(var i=0;i<result.length && result.length>0; i++){
-		showParameter(result[i]);
-	}
-	if(hash_position>par_start){
-		/*Improve this piece of code*/
-		var sub_result = current_url.substring(++hash_position);
-		var sub_array = sub_result.split("&");
-		add_hash();
-		var k = 0;
-		for(k=0;k<sub_array.length && sub_array.length>0; k++){
-			console.log(sub_array[k]);
-			showParameter(sub_array[k]);
+    	if (hash_position>par_start) {
+    		parameter_url = current_url.substring(++par_start, hash_position);
+    	} else {
+	    	parameter_url = current_url.substring(++par_start);
+    	}
+        var result = parameter_url.split("&");
+    	document.getElementById("container").innerHTML = "";
+	    for(var i=0;i<result.length && result.length>0; i++){
+		    showParameter(result[i]);
+    	}
+	    if(hash_position>par_start){
+		    /*Improve this piece of code*/
+    		var sub_result = current_url.substring(++hash_position);
+	    	var sub_array = sub_result.split("&");
+		    add_hash();
+    		var k = 0;
+	    	for(k=0;k<sub_array.length && sub_array.length>0; k++){
+		    	console.log(sub_array[k]);
+			    showParameter(sub_array[k]);
 			}
 		}
 	}

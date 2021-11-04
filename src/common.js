@@ -21,3 +21,8 @@ function applyTheme(selected_theme, color_values, root){
         root.style.setProperty(key, color_values[key]);
     }
 }
+
+function getHostName(url){
+    var url_obj = new URL(url);
+    return url_obj.hostname;
+}
