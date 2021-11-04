@@ -174,6 +174,13 @@ function get_current_tab(callback){
 
 function parse_url(current_url){
 	var par_start = current_url.indexOf('?');
+    var title_div = document.getElementById("title_div");
+    if( title_div != undefined){
+        var url_hostname = getHostName(current_url);
+        var text_node = document.createTextNode(" for " + url_hostname);
+        title_div.appendChild(text_node);
+    }
+
 	var hash_position = current_url.lastIndexOf('#');
 	if(par_start>0 && par_start!= current_url.length-1){
     	if (hash_position>par_start) {
@@ -183,12 +190,6 @@ function parse_url(current_url){
     	}
         var result = parameter_url.split("&");
     	document.getElementById("container").innerHTML = "";
-        var title_div = document.getElementById("title_div");
-        if( title_div != undefined){
-            var url_object = new URL(current_url);
-            var text_node = document.createTextNode(" for " + url_object.hostname);
-            title_div.appendChild(text_node);
-        }
 	    for(var i=0;i<result.length && result.length>0; i++){
 		    showParameter(result[i]);
     	}
