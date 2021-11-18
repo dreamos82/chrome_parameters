@@ -19,10 +19,10 @@
   "commands": {
     "_execute_page_action": {
       "suggested_key": {
-        "windows": "Ctrl+Shift+E",
-        "mac": "Command+Shift+E",
-        "chromeos": "Ctrl+Shift+E",
-        "linux": "Ctrl+Shift+E"
+        "windows": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1",
+        "chromeos": "Ctrl+Shift+1",
+        "linux": "Ctrl+Shift+1"
       }
     }
   },
