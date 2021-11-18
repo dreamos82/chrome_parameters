@@ -15,6 +15,17 @@
     "scripts": ["src/background.js", "src/common.js"],
     "persistent": false
   },
+  
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1",
+        "chromeos": "Ctrl+Shift+1",
+        "linux": "Ctrl+Shift+1"
+      }
+    }
+  },
 
   "page_action": {
     "default_title": "Show/Edit parameter for this URL",
