@@ -33,7 +33,9 @@ function click(e) {
 			if(!isChrome){
 				externalScript = "content_script.js"
 			}
-			browser_handler.tabs.executeScript(tab.id, {file: externalScript}, function(element){});
+            console.log(browser_handler);
+            debugger;
+			browser_handler.scripting.executeScript({ target: {tab.id, files: [externalScript]}, function(element){});
 		});
 	} else if(e.target.id=="social_button"){
 		var element = document.getElementById("social_bar")

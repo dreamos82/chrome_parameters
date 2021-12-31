@@ -1,45 +1,46 @@
 {
-  "manifest_version": 2,
-  "name": "Parameters Editor",
-  "version": "1.7",
+    "manifest_version": 3,
+    "name": "Parameters Editor",
+    "version": "1.7",
 
-  "description": "Shows parameters used in the URL and allows to update, export and import them ",
+    "description": "Shows parameters used in the URL and allows to update, export and import them ",
 
-   "permissions": [
-       "activeTab",
-       "tabs", "<all_urls>",
-       "storage"
-   ],
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "storage"
+    ],
 
-  "background": {
-    "scripts": ["src/background.js", "src/common.js"],
-    "persistent": false
-  },
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "workers_wrapper.js"
+    },
   
-  "commands": {
-    "_execute_page_action": {
-      "suggested_key": {
+    "commands": {
+        "_execute_page_action": {
+        "suggested_key": {
         "windows": "Ctrl+Shift+1",
         "mac": "Command+Shift+1",
         "chromeos": "Ctrl+Shift+1",
         "linux": "Ctrl+Shift+1"
-      }
+            }
+        }
+    },
+
+    "action": {
+        "default_title": "Show/Edit parameter for this URL",
+        "default_icon": "images/icon.png",
+        "default_popup": "src/popup.html"
+    },
+
+    "options_ui": {
+        "page": "src/options.html",
+        "browser_style": true
+    },
+
+    "icons": {
+        "127": "images/icon128.png"
     }
-  },
-
-  "page_action": {
-    "default_title": "Show/Edit parameter for this URL",
-    "default_icon": "images/icon.png",
-    "default_popup": "src/popup.html"
-  },
-
-  "options_ui": {
-      "page": "src/options.html",
-      "browser_style": true,
-      "chrome_style": true
-  },
-
-  "icons": {
-      "127": "images/icon128.png"
-  }
 }
