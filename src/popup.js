@@ -19,7 +19,6 @@ var light_colors_values = {
     '--hr-color': '#000000'
 };
 
-
 function click(e) {
 	if(e.target.id=="update"){
 		update_url();
@@ -33,9 +32,10 @@ function click(e) {
 			if(!isChrome){
 				externalScript = "content_script.js"
 			}
+            console.log("-----");
             console.log(browser_handler);
-            debugger;
-			browser_handler.scripting.executeScript({ target: {tab.id, files: [externalScript]}, function(element){});
+            console.log("----");
+			browser_handler.scripting.executeScript({ target: tab.id, files: [externalScript]});
 		});
 	} else if(e.target.id=="social_button"){
 		var element = document.getElementById("social_bar")

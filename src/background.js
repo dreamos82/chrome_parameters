@@ -27,7 +27,8 @@ browser_handler.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	var i = 0;
 	var i = tab.url.indexOf('?');
 	var parameter_url = tab.url.substring(i++);
-	browser_handler.action.show(tabId);
+    //console.log(browser_handler.action);
+	//browser_handler.action.show(tabId);
 });
 
 function getVersion(){
