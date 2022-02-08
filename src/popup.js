@@ -40,7 +40,7 @@ function click(e) {
 	} else if(e.target.id=="options_button"){
         browser_handler.runtime.openOptionsPage();
     } else if(e.target.id=="help_link") {
-        browser_handler.tabs.create({'url': browser_handler.extension.getURL('src/help.html')}, function(tab){
+        browser_handler.tabs.create({'url': browser_handler.runtime.getURL('src/help.html')}, function(tab){
         });
     }
 }
