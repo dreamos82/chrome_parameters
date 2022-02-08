@@ -3,7 +3,7 @@
  *
  * popup.js
  *
- * @version 1.8
+ * @version 2.0
  *
  */
 var exporters = {csv: create_csv, json: create_json, xml: create_xml};
@@ -32,10 +32,7 @@ function click(e) {
 			if(!isChrome){
 				externalScript = "content_script.js"
 			}
-            console.log("-----");
-            console.log(browser_handler);
-            console.log("----");
-			browser_handler.scripting.executeScript({ target: tab.id, files: [externalScript]});
+			browser_handler.scripting.executeScript({ target: { tabId: tab.id} , files: [externalScript]});
 		});
 	} else if(e.target.id=="social_button"){
 		var element = document.getElementById("social_bar")

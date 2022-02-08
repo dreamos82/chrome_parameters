@@ -16,10 +16,7 @@ var browser_handler;
     } else {
 		browser_handler = browser;
     }
-console.log(browser_handler);
 
-/*
- * This code snippet is needed to detect if we are on browser_handler.or firefox*/
 
 
 browser_handler.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
