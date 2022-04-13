@@ -153,7 +153,7 @@ function create_updated_url(url) {
     new_url = new_url + parameter_name;
 
     if (parameter_value) {
-      new_url = new_url + "=" + escape(parameter_value);
+      new_url = new_url + "=" + encodeURIComponent(parameter_value);
     }
 
     if (i < parameters.length - 1) {
