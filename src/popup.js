@@ -14,8 +14,8 @@ var dark_colors_values = {
         '--bg-color': '#24241f',
         '--hr-color': '#ffffff'
 };
-var light_colors_values = { 
-    '--bg-color': '#ffffff', 
+var light_colors_values = {
+    '--bg-color': '#ffffff',
     '--hr-color': '#000000'
 };
 
@@ -152,7 +152,7 @@ function create_updated_url(url){
 		new_url = new_url + parameter_name;
 
 		if(parameter_value){
-			new_url = new_url + "=" + escape(parameter_value);
+			new_url = new_url + "=" + encodeURIComponent(parameter_value);
 		}
 
 		if(i<parameters.length-1){
@@ -309,7 +309,7 @@ function export_parameters_list(format){
     var link = document.createElement("a");
     var date = new Date();
     link.download = "export"+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getHours()+date.getMinutes()+"." + format;
-    link.href = "data:text/"+format+";charset=utf-8," + encodeURIComponent(result);	
+    link.href = "data:text/"+format+";charset=utf-8," + encodeURIComponent(result);
     if(!isChrome){
 		document.body.appendChild(link);
 	}
@@ -325,7 +325,7 @@ function appendExportOptions() {
         new_element.remove();
     } else {
 		new_element = document.createElement('div');
-        let other_buttons_element = document.getElementById('other_buttons');	
+        let other_buttons_element = document.getElementById('other_buttons');
     	new_element.id = "other_button_options";
     	Object.keys(exporters).map((format) => {
     		let format_element = document.createElement('div'),
@@ -385,5 +385,3 @@ function create_xml(parameter_array){
     xmlText +="</parameters>";
     return xmlText;
 }
-
-
