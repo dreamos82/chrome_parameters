@@ -24,8 +24,8 @@ Contributors to the project
 * [**Olly Nural** - Contributor](https://github.com/OllyNuralAND)
 * [**Jatin Arora** - Contributor](https://github.com/jatinAroraGit")
 * [**Daniel Azvedo** - Contributor (Graphic content)](https://github.com/3rdvision)
-* [**Kushal Singh - Contributor**](https://github.com/kushalsng)
-* [**Wintus**](https://github.com/Wintus)
+* [**Kushal Singh** - Contributor](https://github.com/kushalsng)
+* [**Wintus** - Contributor](https://github.com/Wintus)
 
 
 ### Special Thanks
