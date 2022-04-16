@@ -25,6 +25,8 @@ Contributors to the project
 * [**Jatin Arora** - Contributor](https://github.com/jatinAroraGit")
 * [**Daniel Azvedo** - Contributor (Graphic content)](https://github.com/3rdvision)
 * [**Kushal Singh - Contributor**](https://github.com/kushalsng)
+* [**Wintus**](https://github.com/Wintus)
+
 
 ### Special Thanks
 [**Amit Kohli**](https://github.com/DataStrategist)
