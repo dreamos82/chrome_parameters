@@ -29,8 +29,13 @@ browser_handler.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 function getVersion(){
-    var extension_version = browser_handler.runtime.getManifest();
-    return extension_version.version;
+    var manifest_ref = browser_handler.runtime.getManifest();
+    return manifest_ref.version;
+}
+
+function getManifestVersion() {
+    var manifest_ref = browser_handler.runtime.getManifest();
+    return manifest_ref.manifest_version
 }
 
 function onInstall(){
@@ -46,32 +51,37 @@ function onUpdate(){
 }
 
 browser_handler.runtime.onInstalled.addListener(function(details){
-    browser_handler.storage.local.get(['version'], function(version_value) {
-	    var current_version = getVersion();
-        if(version_value == undefined) {
-            console.log("Setting value");
-            browser_handler.storage.local.set({version: current_version}, function(){
-                console.log("Version number updated...");
-                onInstall();
-            });
-        } else {
-            browser_handler.storage.local.set({version: current_version}, function(){
-                onUpdate();
-            });
-       }
-    });
+    var current_manifest = getManifestVersion();
+    if(current_manifest -- 3) {
+        browser_handler.storage.local.get(['version'], function(version_value) {
+	        var current_version = getVersion();
+            console.log("Current manifest version: " + current_manifest);
+            if(version_value == undefined) {
+                console.log("Setting value");
+                browser_handler.storage.local.set({version: current_version}, function(){
+                    console.log("Version number updated...");
+                    onInstall();
+                });
+            } else {
+                browser_handler.storage.local.set({version: current_version}, function(){
+                    onUpdate();
+                });
+           }
+        });
+    } else {
+	    var old_version = localStorage['version']
+	    if (current_version != old_version) {
+	    	if (old_version == undefined) {
+	    		localStorage['version'] = current_version;
+	    		onInstall();
+	    	} else {
+	    		localStorage['version'] = current_version;
+	    		onUpdate();
+	    	}
+	    }
+    }
+
 }); 
-/*	var old_version = localStorage['version']
-	if (current_version != old_version) {
-		if (old_version == undefined) {
-			localStorage['version'] = current_version;
-			onInstall();
-		} else {
-			localStorage['version'] = current_version;
-			onUpdate();
-		}
-	}
-});*/
 
 
 function lastError(){
