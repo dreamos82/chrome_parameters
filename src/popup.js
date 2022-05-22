@@ -19,6 +19,15 @@ var light_colors_values = {
     '--hr-color': '#000000'
 };
 
+function executeScript () {
+    if ( isChrome ) {
+		browser_handler.scripting.executeScript({ target: { tabId: tab.id} , files: [externalScript]});
+    } else {
+        browser_handler.tabs.executeScript(tab.id, {file: externalScript}, function(element){});
+    }
+
+}
+
 function click(e) {
 	if(e.target.id=="update"){
 		update_url();
@@ -32,7 +41,7 @@ function click(e) {
 			if(!isChrome){
 				externalScript = "content_script.js"
 			}
-			browser_handler.scripting.executeScript({ target: { tabId: tab.id} , files: [externalScript]});
+            executeScript();
 		});
 	} else if(e.target.id=="social_button"){
 		var element = document.getElementById("social_bar")
@@ -40,8 +49,11 @@ function click(e) {
 	} else if(e.target.id=="options_button"){
         browser_handler.runtime.openOptionsPage();
     } else if(e.target.id=="help_link") {
-        browser_handler.tabs.create({'url': browser_handler.runtime.getURL('src/help.html')}, function(tab){
-        });
+        if ( isChrome ) {
+            browser_handler.tabs.create({'url': browser_handler.runtime.getURL('src/help.html')}, function(tab){});
+        } else {
+            browser_handler.tabs.create({'url': browser_handler.extension.getURL('src/help.html')}, function(tab){});
+        }
     }
 }
 
