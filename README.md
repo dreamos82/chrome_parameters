@@ -8,6 +8,16 @@ Install from [Google Chrome Web Store](https://chrome.google.com/webstore/detail
 
 Install from [Firefox Addon Market](https://addons.mozilla.org/en-US/firefox/addon/url-parameters-editor/)
 
+Use from source
+---------------
+
+To use the extension from the sources, the correct manifest has to be created:
+
+* If using firefox copy manifest.firefox.json into manifest.json
+* If using chrome copy manifest.chrome.json into manifest.json
+
+Then follow the browser instructions to load an extension from the file system.
+
 How to contribute
 -----------------
 
