@@ -6,7 +6,7 @@ A chrome/firefox extension that shows parameters from the URL
 
 Install from [Google Chrome Web Store](https://chrome.google.com/webstore/detail/parameters-viewer/jcfdalmioobeifbpcgjghhaifimaeaca) 
 
-Install from [Firefox Addon Market](https://addons.mozilla.org/en-US/firefox/addon/url-parameters-editor/)
+Install from [Firefox Addon Market](https://addons.mozilla.org/firefox/addon/url-parameters-editor/)
 
 How to contribute
 -----------------
@@ -37,4 +37,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
